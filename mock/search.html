@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Pesquisa</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <a class="align-middle top-bar-content pull-right" href="#">Cadastrar</a>
+    <a class="top-bar-content pull-right" href="#">Login</a>
+    <a class="navbar-brand" href="#myPage">Logo</a>
+  </div>
+  <div class="container">
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">Home</a></li>
+        <li><a href="#services">Item 1</a></li>
+        <li><a href="#portfolio">Item 2</a></li>
+        <li><a href="#pricing">Item 3</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid row" style="margin-top: 80px">
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a href="#">
+        <img src="img/guia-do-mochileiro.jpg" class="figure-img img-fluid rounded" alt="Nome do Livro">
+      </a>
+    </div>
+    <div class="book-title">
+        <a href="#">O Guia do Mochileiro das Galáxias</a>  
+      </div>
+      <div class="book-author">
+        <a href="#">Douglas Adams</a>  
+      </div>
+      <div class="text-center" style="margin-top: 10px">
+        <button type="button" class="btn btn-success disabled">Reservado</button>
+      </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a href="#">
+        <img src="img/o-oceano-no-fim-do-caminho.png" class="figure-img img-fluid rounded" alt="Nome do Livro">
+      </a>
+    </div>
+     <div class="book-title">
+        <a href="#">O Oceano no Fim do Caminho</a>  
+      </div>
+      <div class="book-author">
+        <a href="#">Neil Gaiman</a>  
+      </div>
+      <div class="text-center" style="margin-top: 10px">
+        <button type="button" class="btn btn-danger disabled">Indisponível</button>
+      </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a href="#">
+        <img src="img/sonho-de-uma-noite-de-verao.jpg" class="figure-img img-fluid rounded" alt="Nome do Livro">
+      </a>
+    </div>
+    <div class="book-title">
+        <a href="#">Sonho de Uma Noite de Verão</a>  
+      </div>
+      <div class="book-author">
+        <a href="#">Shakspeare</a>  
+      </div>
+      <div class="text-center" style="margin-top: 10px">
+        <button type="button" class="btn btn-default">Reservar</button>
+      </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a href="#">
+        <img src="img/o-ultimo-desejo.jpg" class="figure-img img-fluid rounded" alt="Nome do Livro">
+      </a>
+    </div>
+    <div class="book-title">
+        <a href="#">O Último Desejo</a>  
+      </div>
+      <div class="book-author">
+        <a href="#">Andrzej Sapkowski</a>  
+      </div>
+      <div class="text-center" style="margin-top: 10px">
+        <button type="button" class="btn btn-default">Reservar</button>
+      </div>
+  </div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+
+</body>
+</html>
