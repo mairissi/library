@@ -13,8 +13,8 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <a class="align-middle top-bar-content pull-right" href="#">Cadastrar</a>
-            <a class="top-bar-content pull-right" href="#">Login</a>
+            <a class="align-middle top-bar-content pull-right" href="/library/signUp.jsp">Cadastrar</a>
+            <a class="top-bar-content pull-right" href="/library">Login</a>
             <a class="navbar-brand" href="#myPage">Logo</a>
         </div>
         <div class="container">
@@ -192,12 +192,18 @@
             </div>
             
             <div class="form-group">
-                <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Apoie</label>
+                <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Role</label>
                 <div class="col-md-2">
-                      	<input id="doador" name="donor" class="form-check-input" placeholder="" required="" readonly="readonly" type="checkbox"> Quero ser um doador
+                      	<!-- <input id="doador" name="donor" class="form-check-input" placeholder="" required="" readonly="readonly" type="checkbox"> Quero ser um doador -->
+                
+                		<select class="form-control" name="role">
+		                	<option value="1">Admin</option>
+		                	<option value="2">Usuário</option>
+		                	<option value="3">Doador</option>
+		                </select>
                 </div>
             </div>
-
+            
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-2 control-label" for="Cadastrar"></label>

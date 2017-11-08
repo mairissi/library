@@ -24,6 +24,7 @@ public class RegisterUser implements Command {
 		String district = request.getParameter("district");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
+		String role = request.getParameter("role");
 		User user = new User();
 		user.setCpf(cpf);
 		user.setEmail(email);
@@ -38,16 +39,26 @@ public class RegisterUser implements Command {
 		user.setState(state);
 		user.setStreet(street);
 		user.setNumber(number);
+		user.setRole(role);
 		if(password.equals(request.getParameter("password2"))) {
 			UserDAO usuarioDAO = new UserDAO();
-			usuarioDAO.addUser(user);
-			System.out.println("Sucess!");
-			request.setAttribute("mensagem", "Usuario cadastrado com sucesso!");
-			return "index.jsp";
+			
+			if (usuarioDAO.addUser(user)) {
+				System.out.println("Sucess!");
+				request.setAttribute("mensagem", "Usuario cadastrado com sucesso!");
+			
+				return "index.jsp";
+			}
+			else {
+				System.out.println("FAIL!");
+				request.setAttribute("mensagem", "Senhas não conferem!");
+				
+				return "/signUp.jsp";
+			}
 		} else {
 			System.out.println("FAIL!");
 			request.setAttribute("mensagem", "Senhas não conferem!");
-			return "index.jsp";
+			return "/signUp.jsp";
 		}
 		
 	}

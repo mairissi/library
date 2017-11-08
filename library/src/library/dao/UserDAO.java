@@ -10,14 +10,14 @@ import library.util.ConnectionFactory;
 
 public class UserDAO {
 	
-	public void addUser(User user) {
+	public boolean addUser(User user) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into accounts (cpf, name, email, password, tel, cep, street, address_number, district, city, state)"
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into accounts (cpf, name, email, password, tel, cep, street, address_number, district, city, state, role)"
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getCpf());
 			ps.setString(2, user.getName());
@@ -30,9 +30,14 @@ public class UserDAO {
 			ps.setString(9, user.getDistrict());
 			ps.setString(10, user.getCity());
 			ps.setString(11, user.getState());
+			ps.setString(12, user.getRole());
 			ps.executeUpdate();
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
+			return false;
 		} finally {
 			if (conn != null)
 				ConnectionFactory.closeConnection(conn);

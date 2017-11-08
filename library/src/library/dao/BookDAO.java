@@ -11,7 +11,7 @@ import library.util.ConnectionFactory;
 
 public class BookDAO {
 	
-	public void addBook(Book book) {
+	public boolean addBook(Book book) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
@@ -25,8 +25,12 @@ public class BookDAO {
 			ps.setString(4, book.getPublisher());
 			ps.setString(5, book.getDescription());
 			ps.executeUpdate();
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
+			return false;
 		} finally {
 			if (conn != null)
 				ConnectionFactory.closeConnection(conn);

@@ -25,12 +25,18 @@ public class RegisterBook implements Command {
 		book.setPublisher(publisher);
 		//book.setQuantity(quantity);
 		book.setDescription(description);
-		BookDAO bookDAO = new BookDAO();
-		bookDAO.addBook(book);
-		System.out.println("Sucess!");
-		request.setAttribute("mensagem", "Usuario cadastrado com sucesso!");
-		return "index.jsp";
 		
+		BookDAO bookDAO = new BookDAO();
+		if (bookDAO.addBook(book)) {
+			System.out.println("Sucess!");
+			request.setAttribute("mensagem", "Usuario cadastrado com sucesso!");
+			
+			return "allBooks.jsp";
+		}
+		else {
+			request.setAttribute("mensagem", "Erro ao cadastrar livro.");
+			return "registerBook.jsp";
+		}		
 	}
 
 }

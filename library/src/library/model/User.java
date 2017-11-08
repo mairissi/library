@@ -17,7 +17,7 @@ public class User {
 	private String district;
 	private String city;
 	private String state;
-	private int role;
+	private String role;
 	public String getCpf() {
 		return cpf;
 	}
@@ -96,10 +96,10 @@ public class User {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	
