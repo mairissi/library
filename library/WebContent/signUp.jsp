@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#about">Home</a></li>
-                <li><a href="#services">Item 1</a></li>
+                <li><a href="registerBook.jsp">Mock Cadastrar Livro</a></li>
                 <li><a href="#portfolio">Item 2</a></li>
                 <li><a href="#pricing">Item 3</a></li>
             </ul>

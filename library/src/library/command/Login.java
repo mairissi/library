@@ -20,7 +20,7 @@ public class Login implements Command {
 		UserDAO usuarioDAO = new UserDAO();
 		System.out.println(usuarioDAO.checkUser(user));
 		if(usuarioDAO.checkUser(user)) {
-			return "index.jsp";
+			return "allBooks.jsp";
 		}
 		return "index.jsp";
 	}

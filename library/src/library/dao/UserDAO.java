@@ -16,11 +16,20 @@ public class UserDAO {
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into accounts (cpf, email, password) values (?, ?, ?)";
+			String sql = "insert into accounts (cpf, name, email, password, tel, cep, street, address_number, district, city, state)"
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getCpf());
-			ps.setString(2, user.getEmail());
-			ps.setString(3, user.getPassword());
+			ps.setString(2, user.getName());
+			ps.setString(3, user.getEmail());
+			ps.setString(4, user.getPassword());
+			ps.setString(5, user.getTel());
+			ps.setString(6, user.getCep());
+			ps.setString(7, user.getStreet());
+			ps.setString(8, user.getNumber());
+			ps.setString(9, user.getDistrict());
+			ps.setString(10, user.getCity());
+			ps.setString(11, user.getState());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
