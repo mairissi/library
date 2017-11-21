@@ -1,3 +1,4 @@
+<%@page import="library.dao.BookDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -28,8 +29,16 @@
 				</div>
 			</div>
 		</nav>
+		
 
 		<div class="container" style="margin-top: 150px">
+		<% 
+            	String message = (String) request.getAttribute("message");
+            	String alert = (String) request.getAttribute("alert");
+            	if(message != null && alert != null){
+            		out.println("<div class=\"" + alert + "\">" + message + "</div>");
+            	}
+            %>
 			<div class="col-xs-8" style="margin-bottom: 20px;">
 				<div class="col-xs-11">
 					<input 	type="text" 
@@ -52,38 +61,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>O Guia do Mochileiro das Galáxias</td>
-						<td>Douglas Adams</td>
-						<td>
-							<button type="button" class="btn btn-default">Editar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>O Oceano no Fim do Caminho</td>
-						<td>Neil Gaiman</td>
-						<td>
-							<button type="button" class="btn btn-default">Editar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Sonho de Uma Noite de Verão</td>
-						<td>Shakspeare</td>
-						<td>
-							<button type="button" class="btn btn-default">Editar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>O Último Desejo</td>
-						<td>Andrzej Sapkowski</td>
-						<td>
-							<button type="button" class="btn btn-default">Editar</button>
-						</td>
-					</tr>
+				<% 
+					java.util.ArrayList<library.model.Book> books = BookDAO.getBooks();
+					if(books != null){
+						for(library.model.Book book : books){
+							if(book != null){
+								out.println("<tr>");
+								out.println("<form method=post action=control>");
+								out.println("<td>" + book.getIsbn() + "</td>");
+								out.println("<td>" + book.getTitle() + "</td>");
+								out.println("<td>" + book.getAuthor() + "</td>");
+								out.println("<td><input id=Edit name=command class=\"btn btn-default\" type=Submit value=EditBook></td>");
+								out.println("<input type=hidden name=isbn value=" + book.getIsbn() + ">");
+								out.println("</form>");
+								out.println("</tr>");
+							}
+						}
+					}
+				%>
 				</tbody>
 			</table>
 		</div>

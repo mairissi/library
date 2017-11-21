@@ -8,6 +8,8 @@ public class Book {
 	private String publisher;
 	private int quantity;
 	private String description;
+	private String imgUrl;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -43,6 +45,13 @@ public class Book {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	
 		

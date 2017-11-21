@@ -38,12 +38,21 @@
 					</div>
 					<div class="panel-body">
 						<form method=post action=control>
-								<div class="form-group">
+								<div class="form-group">									
+								<% 
+							       	String message = (String) request.getAttribute("message");
+							       	String alert = (String) request.getAttribute("alert");
+							       	if(message != null && alert != null){
+							       		out.println("<div class=\"" + alert + "\">" + message + "</div>");
+							       	}
+						        %>
+								<br>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-envelope"></i>
 										</span>
-										<input class="form-control" placeholder="email@email.com" name="email" type="email" autofocus="">
+										<input class="form-control" 
+										placeholder="email@email.com" name="email" type="email" autofocus="">
 									</div>
 								</div>
 								<div class="form-group">

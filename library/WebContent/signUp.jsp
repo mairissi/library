@@ -103,7 +103,7 @@
                 <div class="col-md-5">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-envelope"></i>
+                            <i class="glyphicon glyphicon-envelope" ></i>
                         </span>
                         <input id="prependedtext" name="email" class="form-control" placeholder="email@email.com" required="" type="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
@@ -118,13 +118,19 @@
                 <div class="col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-barcode"></i>
+                            <i class="glyphicon glyphicon-lock"></i>
                         </span>
                         <input id="prependedtext" name="password1" class="form-control" placeholder="Senha" required="" type="password">
+                        <%
+							String mensagem = (String) request.getAttribute("mensagem");
+							if(mensagem != null){
+								out.println(mensagem);
+							}
+						%>
                     </div>
                     <div class="input-group" style="margin-top: 5px;">
                          <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-barcode"></i>
+                            <i class="glyphicon glyphicon-lock"></i>
                         </span>
                         <input id="prependedtext" name="password2" class="form-control" placeholder="Confirmar senha" required="" type="password">
                     </div>
@@ -186,7 +192,7 @@
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">Estado</span>
-                        <input id="estado" name="state" class="form-control" placeholder="" required="" type="text">
+                        <input id="estado" name="state" class="form-control" placeholder="" required="" type="text" maxlength="2">
                     </div>
                 </div>
             </div>

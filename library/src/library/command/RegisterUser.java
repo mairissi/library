@@ -1,5 +1,8 @@
 package library.command;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +13,7 @@ public class RegisterUser implements Command {
 	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
-				throws Exception {
+				throws Exception {		
 		String cpf = request.getParameter("cpf");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password1");
@@ -25,27 +28,29 @@ public class RegisterUser implements Command {
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		String role = request.getParameter("role");
-		User user = new User();
-		user.setCpf(cpf);
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setName(name);
-		//user.setBirth_date(birthdate);
-		user.setCep(cep);
-		user.setCity(city);
-		user.setDistrict(district);
-		//user.setSex(sex);
-		user.setTel(tel);
-		user.setState(state);
-		user.setStreet(street);
-		user.setNumber(number);
-		user.setRole(role);
+		
 		if(password.equals(request.getParameter("password2"))) {
+			User user = new User();		
+			user.setCpf(cpf);
+			user.setEmail(email);
+			user.setPassword(encrypt(email, password));
+			user.setName(name);
+			//user.setBirth_date(birthdate);
+			user.setCep(cep);
+			user.setCity(city);
+			user.setDistrict(district);
+			//user.setSex(sex);
+			user.setTel(tel);
+			user.setState(state);
+			user.setStreet(street);
+			user.setNumber(number);
+			user.setRole(role);
+			
 			UserDAO usuarioDAO = new UserDAO();
 			
 			if (usuarioDAO.addUser(user)) {
 				System.out.println("Sucess!");
-				request.setAttribute("mensagem", "Usuario cadastrado com sucesso!");
+				request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
 			
 				return "index.jsp";
 			}
@@ -61,6 +66,22 @@ public class RegisterUser implements Command {
 			return "/signUp.jsp";
 		}
 		
+	}
+	
+	private String encrypt(String email, String password) {
+		String concat = email + password;
+		try {
+			StringBuffer encrypted = new StringBuffer();			
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(concat.getBytes(StandardCharsets.UTF_8));
+			for(int i=0; i<hash.length; i++) {
+				encrypted.append(hash[i]);
+			}
+			return encrypted.toString();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
