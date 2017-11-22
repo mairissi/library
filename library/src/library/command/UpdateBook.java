@@ -11,7 +11,6 @@ public class UpdateBook implements Command {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-		System.out.println("registerBook");
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");
 		int isbn = Integer.parseInt(request.getParameter("isbn"));
@@ -30,6 +29,7 @@ public class UpdateBook implements Command {
 			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro atualizado com sucesso!");
+			request.setAttribute("role", 1);
 			
 			return "allBooks.jsp";
 		}

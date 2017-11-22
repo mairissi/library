@@ -29,6 +29,7 @@ public class RegisterBook implements Command {
 			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro cadastrado com sucesso!");
+			request.setAttribute("role", 3);
 			
 			return "allBooks.jsp";
 		}

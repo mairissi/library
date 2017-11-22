@@ -18,7 +18,7 @@ public class BookDAO {
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into book (isbn, title, author, publisher, description) values (?, ?, ?, ?, ?)";
+			String sql = "insert into book (isbn, title, author, publisher, description, status) values (?, ?, ?, ?, ?, 1)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, book.getIsbn());
 			ps.setString(2, book.getTitle());
@@ -39,13 +39,17 @@ public class BookDAO {
 	}
 	
 	public static ArrayList<Book> getBooks() {
+		return getBooks(2);
+	}
+	
+	public static ArrayList<Book> getBooks(int status) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select * from book");
+			ps = conn.prepareStatement("select * from book where status = " + status);
 			rs = ps.executeQuery();
 			ArrayList<Book> listBook = new ArrayList<Book>();
 			while(rs.next()) {
@@ -56,6 +60,7 @@ public class BookDAO {
 				book.setPublisher(rs.getString(BookEnum.PUBLISHER.index()));
 				book.setDescription(rs.getString(BookEnum.DESCRIPTION.index()));
 				book.setImgUrl(rs.getString(BookEnum.IMG_URL.index()));
+				book.setStatus(rs.getInt(BookEnum.STATUS.index()));
 				listBook.add(book);
 			}
 			return listBook;
@@ -86,6 +91,7 @@ public class BookDAO {
 				book.setPublisher(rs.getString(BookEnum.PUBLISHER.index()));
 				book.setDescription(rs.getString(BookEnum.DESCRIPTION.index()));
 				book.setImgUrl(rs.getString(BookEnum.IMG_URL.index()));
+				book.setStatus(rs.getInt(BookEnum.STATUS.index()));
 			}
 			return book;
 		}catch (Exception e) {
@@ -112,6 +118,46 @@ public class BookDAO {
 			ps.setString(4, book.getDescription());
 			ps.executeUpdate();
 			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();			
+			return false;
+		} finally {
+			if (conn != null) {
+				ConnectionFactory.closeConnection(conn);
+			}
+		}
+	}
+	
+	public static boolean deleteBook(int isbn) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			String sql = "update book set status = 3 where isbn = " + isbn;
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();			
+			return false;
+		} finally {
+			if (conn != null) {
+				ConnectionFactory.closeConnection(conn);
+			}
+		}
+	}
+	
+	public static boolean approveBook(int isbn) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			String sql = "update book set status = 2 where isbn = " + isbn;
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();			

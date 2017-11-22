@@ -15,11 +15,15 @@ public class EditBook implements Command {
 		Book book = BookDAO.getBook(Integer.parseInt(isbn));
 		request.setAttribute("title", book.getTitle());
 		request.setAttribute("author", book.getAuthor());
-		request.setAttribute("isbn", book.getIsbn());
+		request.setAttribute("isbn", Integer.toString(book.getIsbn()));
 		request.setAttribute("publisher", book.getPublisher());
 		request.setAttribute("quantity", book.getQuantity());
 		request.setAttribute("description", book.getDescription());
 		request.setAttribute("imgurl", book.getImgUrl());
+		request.setAttribute("alert", "alert alert-success");
+		request.setAttribute("message", "Livro removido com sucesso!");
+		request.setAttribute("role", 1);
+		
 		return "registerBook.jsp";
 	}
 }

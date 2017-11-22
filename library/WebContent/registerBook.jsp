@@ -12,22 +12,42 @@
 
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <a class="align-middle top-bar-content pull-right" href="#">Cadastrar</a>
-            <a class="top-bar-content pull-right" href="#">Login</a>
-            <a class="navbar-brand" href="#myPage">Logo</a>
-        </div>
-        <div class="container">
-            <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about">Home</a></li>
-                <li><a href="registerBook.jsp">Mock Cadastrar Livro</a></li>
-                <li><a href="#portfolio">Item 2</a></li>
-                <li><a href="#pricing">Item 3</a></li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+			<div class="container">
+							<form method=post action=control>
+							<button class="btn btn-link pull-right" name=command type=Submit value="Logout">Sair</button>						
+							</button></form></li>
+
+				<a class="navbar-brand" href="#myPage">Logo</a>
+			</div>
+			<div class="container">
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a><form method=post action=control><button class="btn btn-link" >Biblioteca</button><input type=hidden name=command value=ListBooks></form></a></li>
+						<%
+						Integer role = (Integer) request.getAttribute("role");
+						if(role == null){
+							role = 2;
+						}	
+						
+						if(role == 1){
+						out.print("<li><a><form method=post action=control>");
+						out.print("<button class=\"btn btn-link\" type=Submit>Doações</button>");
+						out.print("<input type=hidden name=command value=getPending>");
+						out.print("</form></a></li>");
+						}
+						%>
+						<%
+						if (role == 3){
+							out.print("<li><a><form method=post action=control>");
+							out.print("<button class=\"btn btn-link\" type=Submit>Doar Livro</button>");
+							out.print("<input type=hidden name=command value=Donate>");
+							out.print("</form></a></li>");
+						}
+						%>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
     <div class="container" style="margin-top: 80px">
         <div class="panel-body">
@@ -62,13 +82,15 @@
         </div>
 
         <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
+        <% String isbn = (String) request.getAttribute("isbn"); %>
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-1 control-label" for="Titulo" style="text-align:left">Título
                     <h11>*</h11>
                 </label>
                 <div class="col-md-11">
-                    <input id="Titulo" name="title" placeholder="" class="form-control input-md" required="" type="text" value="<%out.println(request.getAttribute("title"));%>">
+                    <input id="Titulo" name="title" placeholder="" class="form-control input-md" required="" type="text" value="<%
+                    		if(isbn!=null){out.println(request.getAttribute("title"));}%>">
                 </div>
             </div>
         
@@ -78,7 +100,8 @@
                     <h11>*</h11>
                 </label>
                 <div class="col-md-11">
-                    <input id="Autor" name="author" placeholder="" class="form-control input-md" required="" type="text" value="<%out.println(request.getAttribute("author"));%>">
+                    <input id="Autor" name="author" placeholder="" class="form-control input-md" required="" type="text" value="<%
+                    		if(isbn!=null){out.println(request.getAttribute("author"));}%>">
                 </div>
             </div>
 
@@ -87,21 +110,16 @@
                     <h11>*</h11>
                 </label>
                 <div class="col-md-2">
-                    <input id="ISBN" name="isbn" placeholder="Somente números" class="form-control input-md" required="" type="text" maxlength="13" value="<%out.println(request.getAttribute("isbn"));%>">
+                    <input id="ISBN" name="isbn" placeholder="Somente números" class="form-control input-md" required="" type="text" maxlength="13" value="<%
+                    		if(isbn!=null){out.println(isbn);}%>" <%if(isbn!=null){out.println(" readonly");}%>>
                 </div>
 
                 <label class="col-md-2 control-label" for="Editora" style="text-align:right">Editora
                     <h11>*</h11>
                 </label>
                 <div class="col-md-4">
-                    <input id="Editora" name="publisher" placeholder="" class="form-control input-md" required="" type="text" value="<%out.println(request.getAttribute("publisher"));%>">
-                </div>
-
-                <label class="col-md-2 control-label" for="Quantidade" style="text-align:right">Quantidade
-                    <h11>*</h11>
-                </label>
-                <div class="col-md-1">
-                    <input type="number" id="quantity" name="Quantidade" placeholder="" required="" style="inline-size: -webkit-fill-available;" value="<%out.println(request.getAttribute("quantity"));%>">
+                    <input id="Editora" name="publisher" placeholder="" class="form-control input-md" required="" type="text" value="<%
+                    		if(isbn!=null){out.println(request.getAttribute("publisher"));}%>">
                 </div>
 
             </div>
@@ -111,13 +129,12 @@
                     <h11>*</h11>
                 </label>
                 <div class="col-md-12">
-                    <textarea id="Descricao" name="description" placeholder="" required="" type="text"
-                        style="width:-webkit-fill-available; height: 200px; resize:none;" value="<%out.println(request.getAttribute("description"));%>">
-                    </textarea>
+                    <textarea id="Descricao" name="description" placeholder="" required=""
+                        style="width:-webkit-fill-available; height: 200px; resize:none;"><%if(isbn!=null){out.println(request.getAttribute("description"));}%></textarea>
                 </div>
             </div>
-            <input id="Registrar" name="Registrar" class="btn btn-success" type="Submit" value="<% if(request.getAttribute("isbn")==null){out.println("Cadastrar");}else{out.println("Salvar");}%>">
-            <input type=hidden name=command value=<% if(request.getAttribute("isbn")==null){out.println("RegisterBook");}else{out.println("UpdateBook");}%>>
+            <input id="Registrar" name="Registrar" class="btn btn-success" type="Submit" value="<% if(isbn==null){out.println("Cadastrar");}else{out.println("Salvar");}%>">
+            <input type=hidden name=command value=<% if(isbn==null){out.print("RegisterBook");}else{out.print("UpdateBook");}%>>
             <% 
             	String message = (String) request.getAttribute("message");
             	String alert = (String) request.getAttribute("alert");

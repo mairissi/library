@@ -9,6 +9,7 @@ public class Book {
 	private int quantity;
 	private String description;
 	private String imgUrl;
+	private int status;
 	
 	public String getTitle() {
 		return title;
@@ -52,6 +53,12 @@ public class Book {
 	}
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 		

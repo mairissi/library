@@ -13,7 +13,7 @@ public class RegisterUser implements Command {
 	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
-				throws Exception {		
+				throws Exception {
 		String cpf = request.getParameter("cpf");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password1");
@@ -46,9 +46,7 @@ public class RegisterUser implements Command {
 			user.setNumber(number);
 			user.setRole(role);
 			
-			UserDAO usuarioDAO = new UserDAO();
-			
-			if (usuarioDAO.addUser(user)) {
+			if (UserDAO.addUser(user)) {
 				System.out.println("Sucess!");
 				request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
 			

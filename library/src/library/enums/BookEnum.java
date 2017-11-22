@@ -7,7 +7,8 @@ public enum BookEnum {
 	PUBLISHER(4),
 	QUANTITY(5),
 	DESCRIPTION(6),
-	IMG_URL(7);
+	IMG_URL(7),
+	STATUS(8);
 	
 	private int index;
 	

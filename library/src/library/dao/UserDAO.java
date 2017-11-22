@@ -10,7 +10,7 @@ import library.util.ConnectionFactory;
 
 public class UserDAO {
 	
-	public boolean addUser(User user) {
+	public static boolean addUser(User user) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
@@ -44,42 +44,29 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean checkUser(User user) {
+	public static int checkUser(User user) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select * from accounts where email=? and password=?");
+			ps = conn.prepareStatement("select role from accounts where email=? and password=?");
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				return true;
+				return rs.getInt(1);
 			}
-			return false;
+			return 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			if (conn != null)
 				ConnectionFactory.closeConnection(conn);
 		}
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 
 }

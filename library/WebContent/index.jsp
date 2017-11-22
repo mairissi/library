@@ -13,20 +13,8 @@
 	<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
-				<a class="align-middle top-bar-content pull-right" href="signUp.jsp">Cadastrar</a>
-			</form>
-				<a class="top-bar-content pull-right" href="#" style="margin-right: 10px;">Login</a>
+				<a class="btn btn-link pull-right" href="signUp.jsp">Cadastrar</a>
 				<a class="navbar-brand" href="#myPage">Logo</a>
-			</div>
-			<div class="container">
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#about">Home</a></li>
-						<li><a href="registerBook.jsp">Mock Cadastrar Livro</a></li>
-						<li><a href="#portfolio">Item 2</a></li>
-						<li><a href="#pricing">Item 3</a></li>
-					</ul>
-				</div>
 			</div>
 		</nav>
 		

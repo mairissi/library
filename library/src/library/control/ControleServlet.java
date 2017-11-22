@@ -21,20 +21,16 @@ public class ControleServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("control");
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String getCommand = request.getParameter("command");
-		String nomeClasse = "library.command." + getCommand;
+		String commandName = "library.command." + getCommand;
 		try {
-			Class classe = Class.forName(nomeClasse);
-			Command command = (Command) classe.newInstance();
+			Command command = (Command) Class.forName(commandName).newInstance();
 			String view = command.execute(request, response);
 			request.getRequestDispatcher(view).
 							forward(request, response);
 		} catch (Exception e) {
-			throw new ServletException(e);
+			e.printStackTrace();
 		}
 		
 	}
