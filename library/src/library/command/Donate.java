@@ -8,7 +8,8 @@ public class Donate implements Command {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-		request.setAttribute("role", 3);
+		int role = Integer.parseInt(request.getParameter("role"));
+		request.setAttribute("role", role);
 		request.setAttribute("status", 2);
 		return "registerBook.jsp";
 	}

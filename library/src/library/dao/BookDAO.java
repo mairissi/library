@@ -12,10 +12,11 @@ import library.util.ConnectionFactory;
 
 public class BookDAO {
 	
+	static Connection conn = null;
+	static PreparedStatement ps = null;
+	static ResultSet rs = null;
+	
 	public static boolean addBook(Book book) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			String sql = "insert into book (isbn, title, author, publisher, description, status) values (?, ?, ?, ?, ?, 1)";
@@ -43,10 +44,6 @@ public class BookDAO {
 	}
 	
 	public static ArrayList<Book> getBooks(int status) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			ps = conn.prepareStatement("select * from book where status = " + status);
@@ -75,10 +72,6 @@ public class BookDAO {
 	}
 	
 	public static Book getBook(int isbn) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			ps = conn.prepareStatement("select * from book where isbn = " + isbn);
@@ -105,9 +98,6 @@ public class BookDAO {
 	}
 	
 	public static boolean updateBook(Book book) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			String sql = "update book set title=?, author=?, publisher=?, description=? where isbn = " + book.getIsbn();
@@ -130,9 +120,6 @@ public class BookDAO {
 	}
 	
 	public static boolean deleteBook(int isbn) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			String sql = "update book set status = 3 where isbn = " + isbn;
@@ -150,9 +137,6 @@ public class BookDAO {
 	}
 	
 	public static boolean approveBook(int isbn) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
 		try {
 			conn = ConnectionFactory.getConnection();
 			String sql = "update book set status = 2 where isbn = " + isbn;

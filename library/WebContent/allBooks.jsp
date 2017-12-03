@@ -19,6 +19,7 @@
 	
 	<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 		<nav class="navbar navbar-default navbar-fixed-top">
+		<%	Integer role = (Integer) request.getAttribute("role");	%>
 			<div class="container">
 							<form method=post action=control>
 							<button class="btn btn-link pull-right" name=command type=Submit value="Logout">Sair</button>						
@@ -30,9 +31,10 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a><form method=post action=control><button class="btn btn-link" >Biblioteca</button><input type=hidden name=command value=ListBooks>
+						<input type=hidden name=role value=<% out.print(role); %>>
 						</form></a></li>
 						<%
-						Integer role = (Integer) request.getAttribute("role");
+						//Integer role = (Integer) request.getAttribute("role");
 						if(role == null){
 							role = 2;
 						}	
@@ -41,6 +43,12 @@
 						out.print("<li><a><form method=post action=control>");
 						out.print("<button class=\"btn btn-link\" type=Submit>Doações</button>");
 						out.print("<input type=hidden name=command value=getPending>");
+						out.print("<input type=hidden name=role value=" + role + ">");
+						out.print("</form></a></li>");
+						out.print("<li><a><form method=post action=control>");
+						out.print("<button class=\"btn btn-link\" type=Submit>Cadastrar livro</button>");
+						out.print("<input type=hidden name=command value=Donate>");
+						out.print("<input type=hidden name=role value=" + role + ">");
 						out.print("</form></a></li>");
 						}
 						%>
@@ -49,6 +57,7 @@
 							out.print("<li><a><form method=post action=control>");
 							out.print("<button class=\"btn btn-link\" type=Submit>Doar Livro</button>");
 							out.print("<input type=hidden name=command value=Donate>");
+							out.print("<input type=hidden name=role value=" + role + ">");
 							out.print("</form></a></li>");
 						}
 						%>

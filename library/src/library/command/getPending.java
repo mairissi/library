@@ -8,7 +8,8 @@ public class getPending implements Command {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-			request.setAttribute("role", 1);
+			int role = Integer.parseInt(request.getParameter("role"));
+			request.setAttribute("role", role);
 			request.setAttribute("status", 1);			
 			return "allBooks.jsp";	
 	}

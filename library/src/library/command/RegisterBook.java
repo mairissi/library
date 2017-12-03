@@ -13,6 +13,7 @@ public class RegisterBook implements Command {
 				throws Exception {
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");
+		int role = Integer.parseInt(request.getParameter("role"));
 		int isbn = Integer.parseInt(request.getParameter("isbn"));
 		String publisher = request.getParameter("publisher");
 		//int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -29,11 +30,11 @@ public class RegisterBook implements Command {
 			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro cadastrado com sucesso!");
-			request.setAttribute("role", 3);
-			
+			request.setAttribute("role", role);
 			return "allBooks.jsp";
 		}
 		else {
+			request.setAttribute("role", role);
 			request.setAttribute("alert", "alert alert-danger");
 			request.setAttribute("message", "Erro ao cadastrar livro.");
 			return "registerBook.jsp";
