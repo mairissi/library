@@ -16,10 +16,10 @@ public class BookDAO {
 	static PreparedStatement ps = null;
 	static ResultSet rs = null;
 	
-	public static boolean addBook(Book book) {
+	public static boolean addBook(Book book, int status) {
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into book (isbn, title, author, publisher, description, status) values (?, ?, ?, ?, ?, 1)";
+			String sql = "insert into book (isbn, title, author, publisher, description, status) values (?, ?, ?, ?, ?, " + status + ")";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, book.getIsbn());
 			ps.setString(2, book.getTitle());

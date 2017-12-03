@@ -25,8 +25,14 @@ public class RegisterBook implements Command {
 		book.setPublisher(publisher);
 		//book.setQuantity(quantity);
 		book.setDescription(description);
+		int status;
+		if(role==1) {
+			status = 2;
+		}else {
+			status = 1;
+		}
 		
-		if (BookDAO.addBook(book)) {
+		if (BookDAO.addBook(book, status)) {
 			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro cadastrado com sucesso!");
