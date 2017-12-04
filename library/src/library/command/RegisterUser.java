@@ -14,56 +14,61 @@ public class RegisterUser implements Command {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-		String cpf = request.getParameter("cpf");
-		String email = request.getParameter("email");
 		String password = request.getParameter("password1");
-		String name = request.getParameter("name");
-		//String Date = request.getParameter("birthdate");
-		//String sex = request.getParameter("sex");
-		String tel = request.getParameter("tel");
-		String cep = request.getParameter("cep");
-		String street = request.getParameter("street");
-		String number = request.getParameter("number");
-		String district = request.getParameter("district");
-		String city = request.getParameter("city");
-		String state = request.getParameter("state");
-		String role = request.getParameter("role");
+		String passwordConfirm = request.getParameter("password2");
 		
-		if(password.equals(request.getParameter("password2"))) {
-			User user = new User();		
-			user.setCpf(cpf);
-			user.setEmail(email);
-			user.setPassword(encrypt(email, password));
-			user.setName(name);
-			//user.setBirth_date(birthdate);
-			user.setCep(cep);
-			user.setCity(city);
-			user.setDistrict(district);
-			//user.setSex(sex);
-			user.setTel(tel);
-			user.setState(state);
-			user.setStreet(street);
-			user.setNumber(number);
-			user.setRole(role);
+		if(isPasswordValid(password, passwordConfirm)) {
+			User user = createUserFromRequest(request);
 			
 			if (UserDAO.addUser(user)) {
 				System.out.println("Sucess!");
-				request.setAttribute("mensagem", "Usu√°rio cadastrado com sucesso!");
+				request.setAttribute("mensagem", "Usu·rio cadastrado com sucesso!");
 			
 				return "index.jsp";
 			}
 			else {
 				System.out.println("FAIL!");
-				request.setAttribute("mensagem", "Senhas n√£o conferem!");
+				request.setAttribute("mensagem", "Senhas n„o conferem!");
 				
 				return "/signUp.jsp";
 			}
 		} else {
 			System.out.println("FAIL!");
-			request.setAttribute("mensagem", "Senhas n√£o conferem!");
+			request.setAttribute("mensagem", "Senhas n„o conferem!");
 			return "/signUp.jsp";
 		}
 		
+	}
+	
+	private boolean isPasswordValid(String password, String passwordConfirm) {
+		if ((password == null) || (passwordConfirm == null) || (password.isEmpty()) || (passwordConfirm.isEmpty())) {
+			return false;
+		}
+		
+		return password.equals(passwordConfirm);
+	}
+	
+	private User createUserFromRequest(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password1");
+		
+		User user = new User();		
+		user.setCpf(request.getParameter("cpf"));
+		user.setEmail(email);
+		user.setPassword(encrypt(email, password));
+		user.setName(request.getParameter("name"));
+		//user.setBirth_date(request.getParameter("birthdate"));
+		user.setCep(request.getParameter("cep"));
+		user.setCity(request.getParameter("city"));
+		user.setDistrict(request.getParameter("district"));
+		//user.setSex(request.getParameter("sex"));
+		user.setTel(request.getParameter("tel"));
+		user.setState(request.getParameter("state"));
+		user.setStreet(request.getParameter("street"));
+		user.setNumber(request.getParameter("number"));
+		user.setRole(request.getParameter("role"));
+		
+		return user;
 	}
 	
 	private String encrypt(String email, String password) {
