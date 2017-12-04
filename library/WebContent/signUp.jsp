@@ -18,6 +18,13 @@
         </div>
     </nav>
     <form class="form-horizontal" style="margin-top: 80px" method=post action=control>
+		<%
+			String message = (String) request.getAttribute("message");
+			String alert = (String) request.getAttribute("alert");
+			if(message != null){
+				out.println("<div align=center class=\"" + alert + "\">" + message + "</div>");
+			}
+		%>
         <div class="panel-body">
             <div class="form-group">
                 <div class="col-md-11 control-label">
@@ -25,7 +32,7 @@
                         <h11>*</h11> Campo Obrigatório </p>
                 </div>
             </div>
-
+            
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-1 control-label" for="Nome" style="text-align:left; margin-left: 105px;">Nome
@@ -110,12 +117,6 @@
                             <i class="glyphicon glyphicon-lock"></i>
                         </span>
                         <input id="prependedtext" name="password1" class="form-control" placeholder="Senha" required="" type="password">
-                        <%
-							String mensagem = (String) request.getAttribute("mensagem");
-							if(mensagem != null){
-								out.println(mensagem);
-							}
-						%>
                     </div>
                     <div class="input-group" style="margin-top: 5px;">
                          <span class="input-group-addon">

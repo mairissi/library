@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import library.model.User;
 import library.util.ConnectionFactory;
 
 public class UserDAO {
 	
-	public static boolean addUser(User user) {
+	public static void addUser(User user) throws SQLIntegrityConstraintViolationException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
@@ -32,12 +33,10 @@ public class UserDAO {
 			ps.setString(11, user.getState());
 			ps.setString(12, user.getRole());
 			ps.executeUpdate();
-			
-			return true;
+		}catch(SQLIntegrityConstraintViolationException sqle){
+			throw sqle;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
-			return false;
 		} finally {
 			if (conn != null)
 				ConnectionFactory.closeConnection(conn);

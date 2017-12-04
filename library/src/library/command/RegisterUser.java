@@ -2,6 +2,7 @@ package library.command;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,22 +20,23 @@ public class RegisterUser implements Command {
 		
 		if(isPasswordValid(password, passwordConfirm)) {
 			User user = createUserFromRequest(request);
-			
-			if (UserDAO.addUser(user)) {
-				System.out.println("Sucess!");
-				request.setAttribute("mensagem", "Usu·rio cadastrado com sucesso!");
-			
+			try {
+				UserDAO.addUser(user);
+				request.setAttribute("message", "Usu√°rio cadastrado com sucesso!");
+				request.setAttribute("alert", "alert alert-success");
 				return "index.jsp";
-			}
-			else {
-				System.out.println("FAIL!");
-				request.setAttribute("mensagem", "Senhas n„o conferem!");
-				
+			}catch(SQLIntegrityConstraintViolationException sqle){
+				request.setAttribute("message", "CPF j√° cadastrado!");
+				request.setAttribute("alert", "alert alert-danger");
+				return "/signUp.jsp";
+			}catch(Exception e) {
+				request.setAttribute("message", "Falha ao cadastrar, tente novamente mais tarde!");
+				request.setAttribute("alert", "alert alert-danger");
 				return "/signUp.jsp";
 			}
 		} else {
-			System.out.println("FAIL!");
-			request.setAttribute("mensagem", "Senhas n„o conferem!");
+			request.setAttribute("message", "Senhas n√£o conferem!");
+			request.setAttribute("alert", "alert alert-danger");
 			return "/signUp.jsp";
 		}
 		
