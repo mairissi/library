@@ -20,7 +20,9 @@ public class ConnectionFactory {
 	
 	public static void closeConnection(Connection conn) {
 		try {
-			conn.close();
+			if (conn != null) {
+				conn.close();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e);

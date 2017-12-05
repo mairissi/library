@@ -33,6 +33,23 @@
 						<li><a><form method=post action=control><button class="btn btn-link" >Biblioteca</button><input type=hidden name=command value=ListBooks>
 						<input type=hidden name=role value=<% out.print(role); %>>
 						</form></a></li>
+						
+						<!-- TEMP -->
+						<li><a><form method=post action=control><button class="btn btn-link" >BorrowBook</button><input type=hidden name=command value=BorrowBook>
+						<input type=hidden name=role value=<% out.print(role); %>>
+						<input type=hidden name=isbn value=123>
+						<input type=hidden name=code value=1>
+						<input type=hidden name=cpf value='3'>
+						</form></a></li>
+						
+						<li><a><form method=post action=control><button class="btn btn-link" >RenewBorrow</button><input type=hidden name=command value=RenewBorrow>
+						<input type=hidden name=role value=<% out.print(role); %>>
+						<input type=hidden name=isbn value=123>
+						<input type=hidden name=code value=1>
+						<input type=hidden name=cpf value='3'>
+						</form></a></li>
+						
+						
 						<%
 						//Integer role = (Integer) request.getAttribute("role");
 						if(role == null){

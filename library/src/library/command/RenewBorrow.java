@@ -24,21 +24,21 @@ public class RenewBorrow extends BookControlCommand {
 				// success
 				request.setAttribute("alert", "alert alert-success");
 				request.setAttribute("message", "Renovação realizada com sucesso!");
-				return "";
+				return "allBooks.jsp";
 			}
 			
 			// error
 			request.setAttribute("alert", "alert alert-danger");
 			request.setAttribute("message", "Erro ao efetuar renovação.");
 			
-			return "";
+			return "allBooks.jsp";
 		}
 		
 		// error
 		request.setAttribute("alert", "alert alert-danger");
 		request.setAttribute("message", "O usuário informado não pode efetuar mais renovações para este livro.");
 		
-		return "";
+		return "allBooks.jsp";
 	}
 	
 	@Override
@@ -46,6 +46,6 @@ public class RenewBorrow extends BookControlCommand {
 		BookControl bc = super.createBookControlFromRequest(request);
 		bc.setExpireDate(super.getExpireDateForBorrow());
 		
-		return super.createBookControlFromRequest(request);
+		return bc;
 	}
 }

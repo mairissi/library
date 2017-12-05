@@ -4,32 +4,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.dao.BookDAO;
+import library.enums.BookStatus;
+import library.enums.Roles;
 import library.model.Book;
 
-public class RegisterBook implements Command {
+public class RegisterBook extends BookCommand {
 	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
+		
+		Book book = createBookFromRequest(request);
+		
+//		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		int role = Integer.parseInt(request.getParameter("role"));
-		int isbn = Integer.parseInt(request.getParameter("isbn"));
-		String publisher = request.getParameter("publisher");
-		//int quantity = Integer.parseInt(request.getParameter("quantity"));
-		String description = request.getParameter("description");
-		Book book = new Book();
-		book.setTitle(title);
-		book.setAuthor(author);
-		book.setIsbn(isbn);
-		book.setPublisher(publisher);
-		//book.setQuantity(quantity);
-		book.setDescription(description);
+		
+		
 		int status;
-		if(role==1) {
-			status = 2;
+		if(role == Roles.ADMIN.id()) {
+			status = BookStatus.AVAILABLE.id();
 		}else {
-			status = 1;
+			status = BookStatus.PENDING.id();
 		}
 		
 		if (BookDAO.addBook(book, status)) {

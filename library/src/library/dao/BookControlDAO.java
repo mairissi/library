@@ -97,12 +97,12 @@ public class BookControlDAO {
 	
 	public boolean canBorrow(String cpf) {
 		int bookCount = getBookCount(cpf);
-		return (bookCount > -1) && (bookCount <= BORROW_LIMIT);
+		return (bookCount > -1) && (bookCount < BORROW_LIMIT);
 	}
 	
 	public boolean canRenewBook(String cpf, int isbn, int code) {
 		int renewalNumber = getRenewalNumber(isbn, code, cpf);
-		return (renewalNumber > -1) && (renewalNumber <= RENEW_LIMIT);
+		return (renewalNumber > -1) && (renewalNumber < RENEW_LIMIT);
 	}
 	
 	public int getBookCount(String cpf) {
@@ -117,8 +117,8 @@ public class BookControlDAO {
 			
 			ResultSet result =  preparedStatement.executeQuery();
 			
-			if (result.first()) {
-				return result.getInt(0);
+			if (result.next()) {
+				return result.getInt(1);
 			}
 			
 			return -1;
@@ -146,7 +146,7 @@ public class BookControlDAO {
 			
 			ResultSet result =  preparedStatement.executeQuery();
 			
-			if (result.first()) {
+			if (result.next()) {
 				return result.getInt("RENEWAL_NUMBER");
 			}
 			

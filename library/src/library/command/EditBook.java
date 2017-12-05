@@ -17,7 +17,6 @@ public class EditBook implements Command {
 		request.setAttribute("author", book.getAuthor());
 		request.setAttribute("isbn", Integer.toString(book.getIsbn()));
 		request.setAttribute("publisher", book.getPublisher());
-		request.setAttribute("quantity", book.getQuantity());
 		request.setAttribute("description", book.getDescription());
 		request.setAttribute("imgurl", book.getImgUrl());
 		request.setAttribute("alert", "alert alert-success");

@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.dao.BookControlDAO;
+import library.dao.BookDAO;
+import library.enums.BookStatus;
+import library.model.Book;
 import library.model.BookControl;
 
 public class BorrowBook extends BookControlCommand {
@@ -16,24 +19,31 @@ public class BorrowBook extends BookControlCommand {
 		
 		if (dao.canBorrow(control.getUserCpf())) {
 			if (dao.add(control)) {
+				
+				Book book = new Book();
+				book.setIsbn(control.getIsbn());
+				book.setCode(control.getCode());
+				
+				BookDAO.updateStatus(book, BookStatus.BORROWED.id());
+				
 				// success
 				request.setAttribute("alert", "alert alert-success");
 				request.setAttribute("message", "Empréstimo realizado com sucesso!");
-				return "";
+				return "allBooks.jsp";
 			}
 			
 			// error
 			request.setAttribute("alert", "alert alert-danger");
 			request.setAttribute("message", "Erro ao efetuar empréstimo.");
 			
-			return "";
+			return "allBooks.jsp";
 		}
 		
 		// error
 		request.setAttribute("alert", "alert alert-danger");
 		request.setAttribute("message", "O usuário informado não pode efetuar mais empréstimos.");
 		
-		return "";
+		return "allBooks.jsp";
 	}
 	
 	@Override
@@ -42,6 +52,6 @@ public class BorrowBook extends BookControlCommand {
 		bc.setRenewalNumber(0);
 		bc.setExpireDate(super.getExpireDateForBorrow());
 		
-		return super.createBookControlFromRequest(request);
+		return bc;
 	}
 }
