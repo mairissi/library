@@ -53,10 +53,27 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="allBooks.jsp">INÍCIO</a></li>
-                    <li><a href="registerBook.jsp">DOAR LIVRO</a></li>
-                    <li><a href="#">DOAÇÕES</a></li>
-                    <li><a href="#">GERENCIAR LIVROS</a></li>
+                	<li><a href="allBooks.jsp">INÍCIO</a></li>
+                	
+                	<% 
+                		Object objRole = request.getSession().getAttribute("role");
+                		
+                		if (objRole != null) {
+                			int roleHeader = Integer.parseInt(objRole.toString());
+                			
+                			if (roleHeader == 1) {
+                    			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");
+                    			out.print("<li><a href=\"#\">GERENCIAR LIVROS</a></li>");
+                    		} else if (roleHeader == 2) {
+                    			out.print("<li><a href=\"#\">MEUS LIVROS</a></li>");
+                    		} else if (roleHeader == 3) {
+                    			out.print("<li><a href=\"registerBook.jsp\">DOAR LIVRO</a></li>");
+                    			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");
+                    		}
+                		}
+                		
+                	%>
+                    
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
