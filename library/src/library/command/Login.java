@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import library.dao.UserDAO;
 import library.model.User;
@@ -23,6 +24,13 @@ public class Login implements Command {
 		int role = UserDAO.checkUser(user);
 		if(role > 0) {
 			request.setAttribute("role", new Integer(role));
+			
+			String cpf = UserDAO.getUserCpf(user.getEmail());
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user", user.getEmail());
+			session.setAttribute("cpf", cpf);
+			
 			return "allBooks.jsp";
 		}
 		request.setAttribute("alert", "alert alert-danger");

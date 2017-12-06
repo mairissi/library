@@ -43,6 +43,30 @@ public class UserDAO {
 		}
 	}
 	
+	public static String getUserCpf(String email) {
+		String sql = "SELECT CPF FROM ACCOUNTS WHERE EMAIL LIKE '%?%'";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			ps = conn.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(conn);
+		}
+		
+		return "";
+	}
+	
 	public static int checkUser(User user) {
 		Connection conn = null;
 		PreparedStatement ps = null;

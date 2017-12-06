@@ -3,17 +3,53 @@ package library.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.dao.BookControlDAO;
+import library.dao.BookDAO;
+import library.enums.BookStatus;
+import library.model.Book;
 import library.model.BookControl;
 
 public class ReserveBook extends BookControlCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return null;
+		
+		BookControl control = createBookControlFromRequest(request);
+		BookControlDAO dao = new BookControlDAO();
+		
+		String message = "Erro ao realizar reserva.";
+		String alertType = "alert alert-danger";
+		String returnPage = "allBooks.jsp";
+		
+		if (dao.canRenewBook(control.getUserCpf(), control.getIsbn(), control.getCode())) {
+			if (dao.update(control)) {
+				
+				Book book = new Book();
+				book.setIsbn(control.getIsbn());
+				book.setCode(control.getCode());
+				
+				BookDAO.updateStatus(book, BookStatus.RESERVED.id());
+				
+				message = "Reserva realizada com sucesso!";
+				alertType = "alert alert-success";
+			}
+		}
+		else {
+			message = "O usuário informado não pode realizar mais reservas.";
+		}
+		
+		request.setAttribute("alert", alertType);
+		request.setAttribute("message", message);
+		
+		return returnPage;
 	}
 	
 	@Override
 	protected BookControl createBookControlFromRequest(HttpServletRequest request) {
-		return super.createBookControlFromRequest(request);
+		BookControl bc = super.createBookControlFromRequest(request);
+		bc.setExpireDate(getExpireDateForReservation());
+		bc.setRenewalNumber(0);
+		
+		return bc;
 	}	
 }
