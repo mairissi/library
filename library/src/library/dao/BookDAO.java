@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import library.enums.BookEnum;
+import library.enums.BookStatus;
 import library.model.Book;
 import library.util.ConnectionFactory;
 
@@ -199,5 +200,30 @@ public class BookDAO {
 		}
 		
 		return 0;
+	}
+
+	public int getStatus(int isbn, int code) {
+		String sql = "SELECT * FROM BOOK WHERE ISBN = ? AND CODE = ?";	
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, isbn);
+			ps.setInt(2, code);
+						
+			ResultSet resultSet = ps.executeQuery();
+			
+			if (resultSet.next()) {
+				return resultSet.getInt("STATUS_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(conn);
+		}
+		
+		return BookStatus.NOT_FOUND.id();
 	}
 }

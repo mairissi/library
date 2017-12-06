@@ -15,13 +15,13 @@ public class ReserveBook extends BookControlCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		BookControl control = createBookControlFromRequest(request);
-		BookControlDAO dao = new BookControlDAO();
+		BookControlDAO dao = getDao();
 		
 		String message = "Erro ao realizar reserva.";
 		String alertType = "alert alert-danger";
 		String returnPage = "allBooks.jsp";
 		
-		if (dao.canRenewBook(control.getUserCpf(), control.getIsbn(), control.getCode())) {
+		if (canReserveBook(control)) {
 			if (dao.update(control)) {
 				
 				Book book = new Book();

@@ -4,10 +4,21 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 
+import library.dao.BlockedUsersDAO;
+import library.dao.BookControlDAO;
 import library.model.BookControl;
 
 public abstract class BookControlCommand implements Command {
 	
+	private BookControlDAO dao;
+	
+	public BookControlCommand() {
+		this.dao = new BookControlDAO();
+	}
+	
+	protected BookControlDAO getDao() {
+		return this.dao;
+	}
 	
 	protected BookControl createBookControlFromRequest(HttpServletRequest request) {
 		BookControl bc = new BookControl();
@@ -37,5 +48,41 @@ public abstract class BookControlCommand implements Command {
 		calendar.set(Calendar.SECOND, 59);
 		
 		return calendar.getTimeInMillis();
+	}
+	
+	protected boolean canReserveBook(BookControl bc) {
+		BlockedUsersDAO blockedUsersDAO = new BlockedUsersDAO();
+		
+		boolean isUserBlocked = blockedUsersDAO.isBlocked(bc.getUserCpf());
+		
+		if (!isUserBlocked) {
+			return dao.canRenewBook(bc.getUserCpf(), bc.getIsbn(), bc.getCode());
+		}
+		
+		return false;
+	}
+	
+	protected boolean canRenewBook(BookControl bc) {
+		BlockedUsersDAO blockedUsersDAO = new BlockedUsersDAO();
+		
+		boolean isUserBlocked = blockedUsersDAO.isBlocked(bc.getUserCpf());
+		
+		if (!isUserBlocked) {
+			return dao.canRenewBook(bc.getUserCpf(), bc.getIsbn(), bc.getCode());
+		}
+		
+		return false;
+	}
+	
+	protected boolean canBorrowBook(BookControl bc) {
+		BlockedUsersDAO blockedUsersDAO = new BlockedUsersDAO();
+		
+		boolean isUserBlocked = blockedUsersDAO.isBlocked(bc.getUserCpf());
+		
+		if (!isUserBlocked) {
+			return dao.canBorrow(bc.getUserCpf());
+		}
+		
+		return false;
 	}
 }

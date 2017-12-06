@@ -11,13 +11,13 @@ public class RenewBorrow extends BookControlCommand {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BookControl control = createBookControlFromRequest(request);
-		BookControlDAO dao = new BookControlDAO();
+		BookControlDAO dao = getDao();
 		
 		String cpf = control.getUserCpf();
 		int isbn = control.getIsbn();
 		int code = control.getCode();
 		
-		if (dao.canRenewBook(cpf, isbn, code)) {
+		if (canRenewBook(control)) {
 			control.setRenewalNumber(dao.getRenewalNumber(isbn, code, cpf) + 1);
 			
 			if (dao.update(control)) {

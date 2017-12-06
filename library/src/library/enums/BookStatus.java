@@ -1,6 +1,7 @@
 package library.enums;
 
 public enum BookStatus {
+	NOT_FOUND	(0),
 	PENDING 	(1),
 	AVAILABLE 	(2),
 	DELETED 	(3),
@@ -9,7 +10,7 @@ public enum BookStatus {
 	
 	private int id;
 	
-	private BookStatus(int id) {
+	BookStatus(int id) {
 		this.id = id;
 	}
 	

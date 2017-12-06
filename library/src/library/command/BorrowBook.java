@@ -15,9 +15,9 @@ public class BorrowBook extends BookControlCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		BookControl control = createBookControlFromRequest(request);
-		BookControlDAO dao = new BookControlDAO();
+		BookControlDAO dao = getDao();
 		
-		if (dao.canBorrow(control.getUserCpf())) {
+		if (canBorrowBook(control)) {
 			if (dao.add(control)) {
 				
 				Book book = new Book();

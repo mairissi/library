@@ -25,11 +25,14 @@ public class Login implements Command {
 		if(role > 0) {
 			request.setAttribute("role", new Integer(role));
 			
-			String cpf = UserDAO.getUserCpf(user.getEmail());
+			user = UserDAO.getUser(user.getEmail());
 			
-			HttpSession session = request.getSession(true);
-			session.setAttribute("user", user.getEmail());
-			session.setAttribute("cpf", cpf);
+			if (user != null) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("user", user.getName());
+				session.setAttribute("cpf", user.getCpf());	
+				session.setAttribute("role", role);
+			}
 			
 			return "allBooks.jsp";
 		}

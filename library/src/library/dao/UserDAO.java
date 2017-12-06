@@ -43,19 +43,34 @@ public class UserDAO {
 		}
 	}
 	
-	public static String getUserCpf(String email) {
-		String sql = "SELECT CPF FROM ACCOUNTS WHERE EMAIL LIKE '%?%'";
+	public static User getUser(String email) {
+		String sql = "SELECT * FROM ACCOUNTS WHERE EMAIL = ?";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
 		try {
 			conn = ConnectionFactory.getConnection();
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
 			
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				return rs.getString(1);
+				User user = new User();
+				user.setCpf(rs.getString("CPF"));
+				user.setEmail(email);
+				user.setName(rs.getString("NAME"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setTel(rs.getString("TEL"));
+				user.setCep(rs.getString("CEP"));
+				user.setStreet(rs.getString("STREET"));
+				user.setNumber(rs.getString("ADDRESS_NUMBER"));
+				user.setDistrict(rs.getString("DISTRICT"));
+				user.setCity(rs.getString("CITY"));
+				user.setState(rs.getString("STATE"));
+				user.setRole(rs.getString("ROLE"));
+				
+				return user;
 			}
 			
 		} catch (SQLException e) {
@@ -64,7 +79,7 @@ public class UserDAO {
 			ConnectionFactory.closeConnection(conn);
 		}
 		
-		return "";
+		return null;
 	}
 	
 	public static int checkUser(User user) {
