@@ -1,7 +1,90 @@
-body{
+body {
     margin:0px;
-    background:#EEE;
+    background-color:#EEE;
 }
+
+br {
+    clear: both;
+}
+
+.header {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+    margin: auto;
+    background-color: lightgray;
+}
+
+.search-input {
+    width: 300px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.search-button {
+    float: left;
+    background-color: #ff8400;
+    color: white;
+    margin-top: 20px;
+    margin-left: 5px;
+    height: 33px;
+}
+
+.logo {
+    margin-top: 15px;
+    height: 45px;
+    float: left;
+}
+
+.login-input {
+    width: 150px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.login-submit {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    background-color: #ff8400;
+    color: white;
+}
+
+.login-container-link {
+    margin-left: 11px;
+    margin-bottom: 5px;
+    float: left;
+    color: black;
+}
+
+.login-container-link:hover {
+    color: #ff8400;
+    text-decoration: none;
+}
+
+.navbar {
+    margin-top: 75px;
+    background-color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #ff8400;
+}
+
+.navbar-default .navbar-nav > .active{
+    color: white;
+    background: #ff8400;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+    background: #ff8400;
+}
+
 .header-cont {
     width:100%;
     position:fixed;
