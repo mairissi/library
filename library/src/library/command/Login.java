@@ -35,7 +35,7 @@ public class Login implements Command {
 		}
 		request.setAttribute("alert", "alert alert-danger");
 		request.setAttribute("message", "Email ou senha incorretos!");
-		return "index.jsp";
+		return "allBooks.jsp";
 	}
 	
 	private String encrypt(String email, String password) {
