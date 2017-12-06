@@ -25,17 +25,9 @@
                 </div>
                 </div>
         <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong>Upload de Arquivo</strong> <small>Capa do livro</small></div>
-            <div class="panel-body">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <input type="file" name="file" id="js-upload-files" multiple style="margin-left: 15px;">
-                    </div>
-                </div>
-            </div>  
-        </div>
+        
         <% String isbn = (String) request.getAttribute("isbn"); %>
+        
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-1 control-label" for="Titulo" style="text-align:left">Título
@@ -57,12 +49,22 @@
                     		if(isbn!=null){out.println(request.getAttribute("author"));}%>">
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="Titulo" style="text-align:left">URL imagem da capa
+                    <h11>*</h11>
+                </label>
+                <div class="col-md-10">
+                    <input id="IMR_URL" name="image_url" placeholder="" class="form-control input-md" required="" type="text" value="<%
+                    		if(isbn!=null){out.println(request.getAttribute("image_url"));}%>">
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-md-1 control-label" for="ISBN" style="text-align:left">ISBN
                     <h11>*</h11>
                 </label>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input id="ISBN" name="isbn" placeholder="Somente números" class="form-control input-md" required="" type="text" maxlength="13" value="<%
                     		if(isbn!=null){out.println(isbn);}%>" <%if(isbn!=null){out.println(" readonly");}%>>
                 </div>
@@ -70,7 +72,7 @@
                 <label class="col-md-2 control-label" for="Editora" style="text-align:right">Editora
                     <h11>*</h11>
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <input id="Editora" name="publisher" placeholder="" class="form-control input-md" required="" type="text" value="<%
                     		if(isbn!=null){out.println(request.getAttribute("publisher"));}%>">
                 </div>

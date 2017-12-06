@@ -14,19 +14,19 @@ public class RegisterBook extends BookCommand {
 		
 		Book book = createBookFromRequest(request);
 		
-		processRequest(request, response);
-		return "registerBook.jsp";
-//		if (BookDAO.addBook(book, 1)) {
-//			System.out.println("Sucess!");
-//			request.setAttribute("alert", "alert alert-success");
-//			request.setAttribute("message", "Livro cadastrado com sucesso!");
-//			return "allBooks.jsp";
-//		}
-//		else {
-//			request.setAttribute("alert", "alert alert-danger");
-//			request.setAttribute("message", "Erro ao cadastrar livro.");
-//			return "registerBook.jsp";
-//		}		
+//		processRequest(request, response);
+//		return "registerBook.jsp";
+		if (BookDAO.addBook(book, 1)) {
+			System.out.println("Sucess!");
+			request.setAttribute("alert", "alert alert-success");
+			request.setAttribute("message", "Livro cadastrado com sucesso!");
+			return "allBooks.jsp";
+		}
+		else {
+			request.setAttribute("alert", "alert alert-danger");
+			request.setAttribute("message", "Erro ao cadastrar livro.");
+			return "registerBook.jsp";
+		}		
 	}
 
 }

@@ -22,7 +22,7 @@ public class BookDAO {
 			int code = getLastCode(book.getIsbn()) + 1;
 			
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into book (isbn, code, title, author, publisher, description, STATUS_ID) values (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into book (isbn, code, title, author, publisher, description, IMG_URL, STATUS_ID) values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			ps = conn.prepareStatement(sql);
 			
@@ -33,6 +33,7 @@ public class BookDAO {
 			ps.setString(index++, book.getAuthor());
 			ps.setString(index++, book.getPublisher());
 			ps.setString(index++, book.getDescription());
+			ps.setString(index++, book.getImgUrl());
 			ps.setInt(index++, status);
 			
 			ps.executeUpdate();		

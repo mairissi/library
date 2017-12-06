@@ -40,12 +40,11 @@
 		status = 2;
 	}
 	ArrayList<Book> books = BookDAO.getBooks(status);
-	String imageNotFound = "resources/images/notFound.gif";
 	
 	if(books != null){
 		for(Book book : books){
 			out.print("<div class=book>");
-			out.print("<img src="+ (book.getImgUrl() != null ? book.getImgUrl() : imageNotFound) + ">");
+			out.print("<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">");
 			out.print("<div class=info>");
 			out.print("<div class=title>" + book.getTitle() + "</div>");
 			out.print("<div class=author>" + book.getAuthor() + "</div>");
