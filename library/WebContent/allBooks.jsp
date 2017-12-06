@@ -18,65 +18,8 @@
 	</head>
 	
 	<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-		<nav class="navbar navbar-default navbar-fixed-top">
-		<%	Integer role = (Integer) request.getAttribute("role");	%>
-			<div class="container">
-							<form method=post action=control>
-							<button class="btn btn-link pull-right" name=command type=Submit value="Logout">Sair</button>						
-							</button></form></li>
-
-				<a class="navbar-brand" href="#myPage">Logo</a>
-			</div>
-			<div class="container">
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a><form method=post action=control><button class="btn btn-link" >Biblioteca</button><input type=hidden name=command value=ListBooks>
-						<input type=hidden name=role value=<% out.print(role); %>>
-						</form></a></li>
-						
-						<!-- TEMP -->
-						<li><a><form method=post action=control><button class="btn btn-link" >BorrowBook</button><input type=hidden name=command value=BorrowBook>
-						<input type=hidden name=role value=<% out.print(role); %>>
-						<input type=hidden name=isbn value=123>
-						<input type=hidden name=code value=1>
-						<input type=hidden name=cpf value='3'>
-						</form></a></li>
-						
-						<li><a><form method=post action=control><button class="btn btn-link" >RenewBorrow</button><input type=hidden name=command value=RenewBorrow>
-						<input type=hidden name=role value=<% out.print(role); %>>
-						<input type=hidden name=isbn value=123>
-						<input type=hidden name=code value=1>
-						<input type=hidden name=cpf value='3'>
-						</form></a></li>
-						
-						
-						<%
-						if(role == null){
-
-							
-						}else if(role == 1){
-						out.print("<li><a><form method=post action=control>");
-						out.print("<button class=\"btn btn-link\" type=Submit>Doações</button>");
-						out.print("<input type=hidden name=command value=getPending>");
-						out.print("<input type=hidden name=role value=" + role + ">");
-						out.print("</form></a></li>");
-						out.print("<li><a><form method=post action=control>");
-						out.print("<button class=\"btn btn-link\" type=Submit>Cadastrar livro</button>");
-						out.print("<input type=hidden name=command value=Donate>");
-						out.print("<input type=hidden name=role value=" + role + ">");
-						out.print("</form></a></li>");
-						}else if (role == 3){
-							out.print("<li><a><form method=post action=control>");
-							out.print("<button class=\"btn btn-link\" type=Submit>Doar Livro</button>");
-							out.print("<input type=hidden name=command value=Donate>");
-							out.print("<input type=hidden name=role value=" + role + ">");
-							out.print("</form></a></li>");
-						}
-						%>
-					</ul>
-				</div>
-			</div>
-		</nav>
+	<%	Integer role = (Integer) request.getAttribute("role");	%>
+		<%@include file="header.jsp" %>
 		
 
 		<div class="container" style="margin-top: 150px">
@@ -87,18 +30,6 @@
 	       		out.println("<div class=\"" + alert + "\">" + message + "</div>");
 	       	}
         %>
-			<div class="col-xs-8" style="margin-bottom: 20px;">
-				<div class="col-xs-11">
-					<input 	type="text" 
-							id="search-books" 
-							class="form-control"
-							placeholder="Pesquisar livro..." />
-				</div>
-				
-				<button type="button" class="btn btn-default ">
-					<span class="glyphicon glyphicon-search" />
-				</button>
-			</div>
 		</div>
 		
 <div id="post-wrapper" class="post-wrapper clearfix" style="margin: 0 auto; min-width: 800px; max-width: 1600px;">
