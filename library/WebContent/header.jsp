@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/style.css">
 </head>
 <body>
-       
+    
     <div class="container navbar-fixed-top header">                            
         <img class="logo" src="resources/images/logo.png" href="index.jsp" />
         
