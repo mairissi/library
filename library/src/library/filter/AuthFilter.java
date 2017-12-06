@@ -31,22 +31,22 @@ public class AuthFilter implements Filter {
         boolean loginCommand = "Login".equals(command);
         boolean signUpCommand = "RegisterUser".equals(command);
         boolean loggedIn = session.getAttribute("user") != null;;
-        boolean isIndexURI = isIndexURI(request);
+        boolean isallBooksURI = isallBooksURI(request);
         boolean isStaticResource = request.getRequestURI().startsWith("/resources/");
         
-        boolean allowRequest = isStaticResource || isIndexURI || loggedIn || signUpCommand || loginCommand;
+        boolean allowRequest = isStaticResource || isallBooksURI || loggedIn || signUpCommand || loginCommand;
         
         if (allowRequest) {
             chain.doFilter(request, response);
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("allBooks.jsp");
         }
 		
 	}
 	
-	private boolean isIndexURI(HttpServletRequest request) {
-		String indexURI = request.getContextPath() + "/index.jsp";
-		return (request.getRequestURI().equals(indexURI)) || (request.getRequestURI().equals(request.getContextPath()));
+	private boolean isallBooksURI(HttpServletRequest request) {
+		String allBooksURI = request.getContextPath() + "/allBooks.jsp";
+		return (request.getRequestURI().equals(allBooksURI)) || (request.getRequestURI().equals(request.getContextPath()));
 	}
 	
 	public void doFilter2(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {    
