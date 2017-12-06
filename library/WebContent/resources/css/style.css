@@ -1,0 +1,44 @@
+body{
+    margin:0px;
+    background:#EEE;
+}
+.header-cont {
+    width:100%;
+    position:fixed;
+    top:0px;
+}
+.book {
+    background: #F0F0F0;
+    border: 1px solid #CCC;
+    margin: 15px;
+    width: 250px;
+    float: left;
+}
+.info {
+    background: #E0E0E0;
+    width: 248px;
+}
+.title{
+	font-size: 18px;
+	text-align: center;
+}
+.author{
+	font-size: 14px;
+	text-align: center;
+}
+.description{
+	font-size: 12px;
+	text-align: center;
+}
+.login{
+	float: rigth;
+	widows: 30px;
+}
+
+
+img {
+	width: 200px; 
+	height: 250px; 
+	display: block; 
+	margin: 0 auto;
+}

@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="resources/css/style.css">
 	</head>
 	
 	<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -51,12 +51,10 @@
 						
 						
 						<%
-						//Integer role = (Integer) request.getAttribute("role");
 						if(role == null){
-							role = 2;
-						}	
-						
-						if(role == 1){
+
+							
+						}else if(role == 1){
 						out.print("<li><a><form method=post action=control>");
 						out.print("<button class=\"btn btn-link\" type=Submit>Doações</button>");
 						out.print("<input type=hidden name=command value=getPending>");
@@ -67,10 +65,7 @@
 						out.print("<input type=hidden name=command value=Donate>");
 						out.print("<input type=hidden name=role value=" + role + ">");
 						out.print("</form></a></li>");
-						}
-						%>
-						<%
-						if (role == 3){
+						}else if (role == 3){
 							out.print("<li><a><form method=post action=control>");
 							out.print("<button class=\"btn btn-link\" type=Submit>Doar Livro</button>");
 							out.print("<input type=hidden name=command value=Donate>");
@@ -114,18 +109,17 @@
 		status = 2;
 	}
 	ArrayList<Book> books = BookDAO.getBooks(status);
-	String imageNotFound = "https://images-americanas.b2w.io/statics-hotfix-acom-prod-lazyload-3/img/notFound.gif";
+	String imageNotFound = "resources/images/notFound.gif";
 	
 	if(books != null){
 		for(Book book : books){
-			out.print("<div class=\"row\" style=\"float: left; width: 400px; margin-bottom: 50px\">");
-			out.print("<img src=" 
-				+ (book.getImgUrl() != null ? book.getImgUrl() : imageNotFound) 
-				+ " width=\"200\" height=\"300\" style=\"display: block; margin: 0 auto;\">");
-			out.print("<div align=center>" + book.getTitle() + "</div>");
-			out.print("<div align=center>" + book.getAuthor() + "</div>");
-			out.print("<div align=center>" + book.getDescription() + "</div>");
-			if(role == 1){
+			out.print("<div class=book>");
+			out.print("<img src="+ (book.getImgUrl() != null ? book.getImgUrl() : imageNotFound) + ">");
+			out.print("<div class=info>");
+			out.print("<div class=title>" + book.getTitle() + "</div>");
+			out.print("<div class=author>" + book.getAuthor() + "</div>");
+			out.print("<div class=description>" + book.getDescription() + "</div>");
+			if(role != null && role == 1){
 				out.print("<div align=center>" 
 					+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-pencil\"></span></button>"
 					+ "<input type=hidden name=command value=EditBook>"
@@ -151,7 +145,7 @@
 				}
 				out.print("</div>");*/
 			}
-			out.print("</div>");
+			out.print("</div></div>");
 		}
 	}
 	%>
