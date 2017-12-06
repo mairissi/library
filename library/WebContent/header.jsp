@@ -40,7 +40,7 @@
 	        	else {
 	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
 	        		out.print("<p class=\"header-text\">Bem-vindo " + user + "! </p>");
-	        		out.print("<a type=\"submit\" class=\"header-text login-container-link\" href=\"control\">Sair</a>");
+	        		out.print("<input id=\"Logout\" name=\"Logout\" class=\"btn login-submit\" type=\"Submit\" value=\"Sair\" />");
 	        		out.print("<input type=hidden name=command value=Logout />");
 	        		out.print("</form>");
 	        	}
