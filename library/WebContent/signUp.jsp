@@ -11,12 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <a class="top-bar-content pull-right" href="index.jsp">Login</a>
-            <a class="navbar-brand" href="#myPage">Logo</a>
-        </div>
-    </nav>
+    <%@include file="header.jsp" %>
     <form class="form-horizontal" style="margin-top: 80px" method=post action=control>
 		<%
 			String message = (String) request.getAttribute("message");
@@ -127,23 +122,18 @@
                 </div>
             </div>
 
-            <!-- Search input-->
-            <div class="form-group">
-                <label class="col-md-1 control-label" for="CEP" style="text-align:left; margin-left: 105px;">CEP
-                    <h11>*</h11>
-                </label>
-                <div class="col-md-2">
-                    <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search"
-                        maxlength="8" pattern="[0-9]+$">
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-primary" onclick="pesquisacep(cep.value)">Pesquisar</button>
-                </div>
-            </div>
-
             <!-- Prepended text-->
             <div class="form-group">
                 <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Endereço</label>
+                
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">CEP</span>
+                        <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search"
+                        maxlength="8" pattern="[0-9]+$">
+                    </div>
+                </div>
+                
                 <div class="col-md-4">
                     <div class="input-group">
                         <span class="input-group-addon">Rua</span>
@@ -160,18 +150,16 @@
                     </div>
 
                 </div>
+                
+            </div>
 
-                <div class="col-md-3">
+            <div class="form-group" style="margin-left: 250px;">
+            	<div class="col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">Bairro</span>
                         <input id="bairro" name="district" class="form-control" placeholder="" required="" type="text">
                     </div>
-
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="prependedtext"></label>
                 <div class="col-md-4">
                     <div class="input-group">
                         <span class="input-group-addon">Cidade</span>
@@ -204,8 +192,8 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="Cadastrar"></label>
                 <div class="col-md-8">
-                    <input id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit" value=Cadastrar>
-                    <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+                    <input id="Cadastrar" name="Cadastrar" class="btn submit" type="Submit" value=Cadastrar>
+                    <button id="Cancelar" name="Cancelar" class="btn cancel" type="Reset">Cancelar</button>
                 </div>
             </div>
         </div>

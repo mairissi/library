@@ -54,6 +54,31 @@ br {
     color: white;
 }
 
+.submit:hover {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    background-color: #990088;
+    color: #BBB;
+}
+
+.cancel {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    background-color: #882242;
+    color: white;
+}
+
+.cancel:hover {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    background-color: #662242;
+    color: #BBB;
+}
+
+
 .login-container-link {
     margin-left: 11px;
     margin-bottom: 5px;
