@@ -33,6 +33,7 @@ br {
 
 .logo {
     margin-top: 15px;
+    margin-bottom: 15px;
     height: 45px;
     float: left;
 }
@@ -63,6 +64,11 @@ br {
 .login-container-link:hover {
     color: #BB0084;
     text-decoration: none;
+}
+
+.header-text {
+	margin-top: 15px;
+	float: left;
 }
 
 .navbar {

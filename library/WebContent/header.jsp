@@ -25,17 +25,26 @@
         
         <!-- Renderizar apenas se o usuário não estiver logado -->
         <div>
-            <form method="post" action="control" class="pull-right">
-                <input class="form-control login-input" placeholder="E-mail" name="email" type="email" autofocus="" />
-                <input class="form-control login-input" placeholder="Senha" name="password" type="password" value="" />
-                
-                <input id="Login" name="Login" class="btn login-submit" type="Submit" value="Login" />
-                <input type=hidden name=command value=Login />
-            
-                <br>
-            
-                <a class="login-container-link" href="signUp.jsp">Não possui conta? Cadastre-se aqui</a>
-            </form>
+            <% String user = (String) request.getSession().getAttribute("user");
+        
+	        	if (user == null) {
+	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
+	        		out.print("<input class=\"form-control login-input\" placeholder=\"E-mail\" name=\"email\" type=\"email\" autofocus=\"\" />");
+	        		out.print("<input class=\"form-control login-input\" placeholder=\"Senha\" name=\"password\" type=\"password\" value=\"\" />");
+	        		out.print("<input id=\"Login\" name=\"Login\" class=\"btn login-submit\" type=\"Submit\" value=\"Login\" />");
+	        		out.print("<input type=hidden name=command value=Login />");
+	        		out.print("<br>");
+	        		out.print("<a class=\"login-container-link\" href=\"signUp.jsp\">Não possui conta? Cadastre-se aqui</a>");
+	        		out.print("</form>");
+	        	}
+	        	else {
+	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
+	        		out.print("<p class=\"header-text\">Bem-vindo " + user + "! </p>");
+	        		out.print("<a type=\"submit\" class=\"header-text login-container-link\" href=\"control\">Sair</a>");
+	        		out.print("<input type=hidden name=command value=Logout />");
+	        		out.print("</form>");
+	        	}
+	        %>
         </div>
     </div>
         
