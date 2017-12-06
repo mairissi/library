@@ -11,53 +11,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-		<%	Integer role = (Integer) request.getAttribute("role");	%>
-			<div class="container">
-							<form method=post action=control>
-							<button class="btn btn-link pull-right" name=command type=Submit value="Logout">Sair</button>						
-							</button></form></li>
-
-				<a class="navbar-brand" href="#myPage">Logo</a>
-			</div>
-			<div class="container">
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a><form method=post action=control><button class="btn btn-link" >Biblioteca</button><input type=hidden name=command value=ListBooks>
-						<input type=hidden name=role value=<% out.print(role); %>>
-						</form></a></li>
-						<%
-						//Integer role = (Integer) request.getAttribute("role");
-						if(role == null){
-							role = 2;
-						}	
-						
-						if(role == 1){
-						out.print("<li><a><form method=post action=control>");
-						out.print("<button class=\"btn btn-link\" type=Submit>Doações</button>");
-						out.print("<input type=hidden name=command value=getPending>");
-						out.print("<input type=hidden name=role value=" + role + ">");
-						out.print("</form></a></li>");
-						out.print("<li><a><form method=post action=control>");
-						out.print("<button class=\"btn btn-link\" type=Submit>Cadastrar livro</button>");
-						out.print("<input type=hidden name=command value=Donate>");
-						out.print("<input type=hidden name=role value=" + role + ">");
-						out.print("</form></a></li>");
-						}
-						%>
-						<%
-						if (role == 3){
-							out.print("<li><a><form method=post action=control>");
-							out.print("<button class=\"btn btn-link\" type=Submit>Doar Livro</button>");
-							out.print("<input type=hidden name=command value=Donate>");
-							out.print("<input type=hidden name=role value=" + role + ">");
-							out.print("</form></a></li>");
-						}
-						%>
-					</ul>
-				</div>
-			</div>
-		</nav>
+    <%@include file="header.jsp" %>
+            <%    Integer role = (Integer) request.getAttribute("role");    %>
+    
 
     <div class="container" style="margin-top: 80px">
         <div class="panel-body">
@@ -68,30 +24,17 @@
                     </div>
                 </div>
                 </div>
+        <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Upload de Arquivo</strong> <small>Capa do livro</small></div>
             <div class="panel-body">
-                <!-- Standar Form -->
-                    <form method=post action=control enctype="multipart/form-data" id="js-upload-form">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <input type="file" name="files[]" id="js-upload-files" multiple>
-                            </div>
-                            <button type="button" class="btn btn-primary" style="margin-left: 10px" id="js-upload-submit">Fazer Upload</button>
-                        </div>
-                    </form>
-
-                <!-- Upload Finished -->
-                <div class="js-upload-finished">
-                    <h4 style="margin-bottom: 10px">Arquivo Processado</h4>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">OK</span>image-01.jpg</a>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="file" name="file" id="js-upload-files" multiple style="margin-left: 15px;">
                     </div>
                 </div>
             </div>  
         </div>
-
-        <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
         <% String isbn = (String) request.getAttribute("isbn"); %>
             <!-- Text input-->
             <div class="form-group">
@@ -143,20 +86,8 @@
                         style="width:-webkit-fill-available; height: 200px; resize:none;"><%if(isbn!=null){out.println(request.getAttribute("description"));}%></textarea>
                 </div>
             </div>
-            <input id="Registrar" name="Registrar" class="btn btn-success" type="Submit" value="
-            	<% if(isbn==null){
-            			if(role == 1){
-            				out.println("Cadastrar");
-            			} else {
-            				out.println("Doar");
-            			}
-            		}else{
-            			out.println("Salvar");
-            		}
-            	%>
-            ">
-            <input type=hidden name=command value=<% if(isbn==null){out.print("RegisterBook");}else{out.print("UpdateBook");}%>>
-            <input type=hidden name=role value=<% out.print(role); %>>
+            <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value="Doar">
+            <input type=hidden name=command value=RegisterBook>
             <% 
             	String message = (String) request.getAttribute("message");
             	String alert = (String) request.getAttribute("alert");

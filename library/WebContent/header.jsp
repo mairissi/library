@@ -31,7 +31,7 @@
 	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
 	        		out.print("<input class=\"form-control login-input\" placeholder=\"E-mail\" name=\"email\" type=\"email\" autofocus=\"\" />");
 	        		out.print("<input class=\"form-control login-input\" placeholder=\"Senha\" name=\"password\" type=\"password\" value=\"\" />");
-	        		out.print("<input id=\"Login\" name=\"Login\" class=\"btn login-submit\" type=\"Submit\" value=\"Login\" />");
+	        		out.print("<input id=\"Login\" name=\"Login\" class=\"btn submit\" type=\"Submit\" value=\"Login\" />");
 	        		out.print("<input type=hidden name=command value=Login />");
 	        		out.print("<br>");
 	        		out.print("<a class=\"login-container-link\" href=\"signUp.jsp\">Não possui conta? Cadastre-se aqui</a>");
@@ -40,7 +40,7 @@
 	        	else {
 	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
 	        		out.print("<p class=\"header-text\">Bem-vindo " + user + "! </p>");
-	        		out.print("<input id=\"Logout\" name=\"Logout\" class=\"btn login-submit\" type=\"Submit\" value=\"Sair\" />");
+	        		out.print("<input id=\"Logout\" name=\"Logout\" class=\"btn submit\" type=\"Submit\" value=\"Sair\" />");
 	        		out.print("<input type=hidden name=command value=Logout />");
 	        		out.print("</form>");
 	        	}
@@ -53,8 +53,8 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">INÍCIO</a></li>
-                    <li><a href="#">DOAR LIVRO</a></li>
+                    <li class="active"><a href="allBooks.jsp">INÍCIO</a></li>
+                    <li><a href="registerBook.jsp">DOAR LIVRO</a></li>
                     <li><a href="#">DOAÇÕES</a></li>
                     <li><a href="#">GERENCIAR LIVROS</a></li>
                     <li><a href="#">FAQ</a></li>

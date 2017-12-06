@@ -35,8 +35,6 @@
 <div id="post-wrapper" class="post-wrapper clearfix" style="margin: 0 auto; min-width: 800px; max-width: 1600px;">
 
 	<%
-	String email = request.getSession().getAttribute("user").toString();
-	out.println("Olar: " + email);
 	Integer status = (Integer) request.getAttribute("status");
 	if(status == null){
 		status = 2;
