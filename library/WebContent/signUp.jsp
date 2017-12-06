@@ -48,26 +48,13 @@
                         pattern="[0-9]+$">
                 </div>
 
-                <label class="col-md-2 control-label" for="Nome">Nascimento
+                <label class="col-md-1 control-label" for="Nome">Nascimento
                     <h11>*</h11>
                 </label>
                 <div class="col-md-2">
                     <input id="dtnasc" name="birthdate" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10"
                         OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-                </div>
-
-                <!-- Multiple Radios (inline) -->
-                <label class="col-md-1 control-label" for="radios">Sexo
-                    <h11>*</h11>
-                </label>
-                <div class="col-md-3">
-                    <label required="" class="radio-inline" for="radios-0">
-                        <input name="sex" id="sexo" value="feminino" type="radio" required> Feminino
-                    </label>
-                    <label class="radio-inline" for="radios-1">
-                        <input name="sex" id="sexo" value="masculino" type="radio"> Masculino
-                    </label>
-                </div>
+                </div>                
             </div>
 
             <!-- Prepended text-->
@@ -124,7 +111,7 @@
 
             <!-- Prepended text-->
             <div class="form-group">
-                <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Endereço</label>
+                <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Endereço *</label>
                 
                 <div class="col-md-2">
                     <div class="input-group">
