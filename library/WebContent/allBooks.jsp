@@ -80,7 +80,7 @@
 		
 
 		<div class="container" style="margin-top: 150px">
-		<% 
+		<% 		
 	       	String message = (String) request.getAttribute("message");
 	       	String alert = (String) request.getAttribute("alert");
 	       	if(message != null && alert != null){
@@ -104,6 +104,8 @@
 <div id="post-wrapper" class="post-wrapper clearfix" style="margin: 0 auto; min-width: 800px; max-width: 1600px;">
 
 	<%
+	String email = request.getSession().getAttribute("user").toString();
+	out.println("Olar: " + email);
 	Integer status = (Integer) request.getAttribute("status");
 	if(status == null){
 		status = 2;
