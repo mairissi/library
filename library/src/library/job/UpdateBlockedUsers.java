@@ -26,7 +26,7 @@ public class UpdateBlockedUsers implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		// As tasks executam sempre que o servlet È iniciado. Depois disso, È executada
+		// As tasks executam sempre que o servlet √© iniciado. Depois disso, √© executada
 		// automaticamente depois que o delay ocorre.
 		executeAtMidnight();
 	}
@@ -86,7 +86,7 @@ class UpdateBlockedUsersTask extends TimerTask {
 	
 	@Override
 	public void run() {
-		System.out.println("Atualizando usu·rios bloqueados...");
+		System.out.println("Atualizando usu√°rios bloqueados...");
 		List<BookControl> expiredBooks = bookControlDAO.getExpired();
 		
 		for (BookControl expiredBook : expiredBooks) {
@@ -104,7 +104,7 @@ class UpdateBlockedUsersTask extends TimerTask {
 				
 				blockedUser.setBlockDate(Calendar.getInstance().getTimeInMillis());
 				blockedUser.setCpf(expiredBook.getUserCpf());
-				blockedUser.setBlockReason("Data de devoluÁ„o expirada.");
+				blockedUser.setBlockReason("Data de devolu√ß√£o expirada.");
 				
 				blockedDAO.add(blockedUser);
 			} else if (isBookReserved) {
