@@ -1,22 +1,22 @@
 package library.enums;
 
 public enum BookEnum {
-	ISBN(1),
-	TITLE(2),
-	AUTHOR(3),
-	PUBLISHER(4),
-	QUANTITY(5),
-	DESCRIPTION(6),
-	IMG_URL(7),
-	STATUS(8);
+    ISBN("ISBN"),
+    CODE("CODE"),
+    TITLE("TITLE"),
+    AUTHOR("AUTHOR"),
+    PUBLISHER("PUBLISHER"),
+    DESCRIPTION("DESCRIPTION"),
+    IMG_URL("IMG_URL"),
+    STATUS_ID("STATUS_ID");
 	
-	private int index;
+	private String header;
 	
-	BookEnum(int index){
-		this.index = index;
+	BookEnum(String header){
+		this.header = header;
 	}
 	
-	public int index() {
-		return index;
+	public String header() {
+		return header;
 	}
 }

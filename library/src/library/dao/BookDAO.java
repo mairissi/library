@@ -54,20 +54,20 @@ public class BookDAO {
 	public static ArrayList<Book> getBooks(int status) {
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select * from book where STATUS_ID = " + status);
+			ps = conn.prepareStatement("select * from book where STATUS_ID = " + status + " order by lower(TITLE)");
 			rs = ps.executeQuery();
 			ArrayList<Book> listBook = new ArrayList<Book>();
 			
 			while(rs.next()) {
 				Book book = new Book();
 				
-				book.setIsbn(rs.getInt(BookEnum.ISBN.index()));
-				book.setTitle(rs.getString(BookEnum.TITLE.index()));
-				book.setAuthor(rs.getString(BookEnum.AUTHOR.index()));
-				book.setPublisher(rs.getString(BookEnum.PUBLISHER.index()));
-				book.setDescription(rs.getString(BookEnum.DESCRIPTION.index()));
-				book.setImgUrl(rs.getString(BookEnum.IMG_URL.index()));
-				book.setStatus(rs.getInt(BookEnum.STATUS.index()));
+				book.setIsbn(rs.getInt(BookEnum.ISBN.header()));
+				book.setTitle(rs.getString(BookEnum.TITLE.header()));
+				book.setAuthor(rs.getString(BookEnum.AUTHOR.header()));
+				book.setPublisher(rs.getString(BookEnum.PUBLISHER.header()));
+				book.setDescription(rs.getString(BookEnum.DESCRIPTION.header()));
+				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
+				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
 				
 				listBook.add(book);
 			}
@@ -90,13 +90,13 @@ public class BookDAO {
 			Book book = new Book();
 			
 			while(rs.next()) {				
-				book.setIsbn(rs.getInt(BookEnum.ISBN.index()));
-				book.setTitle(rs.getString(BookEnum.TITLE.index()));
-				book.setAuthor(rs.getString(BookEnum.AUTHOR.index()));
-				book.setPublisher(rs.getString(BookEnum.PUBLISHER.index()));
-				book.setDescription(rs.getString(BookEnum.DESCRIPTION.index()));
-				book.setImgUrl(rs.getString(BookEnum.IMG_URL.index()));
-				book.setStatus(rs.getInt(BookEnum.STATUS.index()));
+				book.setIsbn(rs.getInt(BookEnum.ISBN.header()));
+				book.setTitle(rs.getString(BookEnum.TITLE.header()));
+				book.setAuthor(rs.getString(BookEnum.AUTHOR.header()));
+				book.setPublisher(rs.getString(BookEnum.PUBLISHER.header()));
+				book.setDescription(rs.getString(BookEnum.DESCRIPTION.header()));
+				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
+				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
 			}
 			
 			return book;
