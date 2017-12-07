@@ -84,6 +84,7 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 									<input type=hidden name=command value=EditBook>
 								</form>
 							</div>
+							<% if(book.getStatus() == 1){ %>
 							<div class=pull-left>
 								<form method=post action=control>
 									<button type=Submit class="btn btn-default btn-edit">Aceitar</button>
@@ -91,9 +92,10 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 									<input type=hidden name=command value=Approve>
 								</form>
 							</div>
+							<% } %>
 							<div class=pull-left>
 								<form method=post action=control>
-									<button type=Submit class="btn btn-default btn-edit">Rejeitar</button>
+									<button type=Submit class="btn btn-default btn-edit"><%if(book.getStatus()!=1){out.print("Excluir");}else{out.print("Rejeitar");}%></button>
 									<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
 									<input type=hidden name=command value=DeleteBook>
 								</form>

@@ -55,19 +55,26 @@
 						out.print("<div class=option>");//2
 							out.print("<div class=title>" + book.getTitle() + "</div>");
 							out.print("<div class=author>" + book.getAuthor() + "</div>");
-							if(role != null && role == 1){
-								out.print("<div>");//3
-									out.print("<div class=option-edit>" 
-											+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-edit\">Editar</button>"
-											+ "<input type=hidden name=command value=EditBook>"
-											+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
-										+ "</div>");
-									out.print("<div class=option-remove>" 
-												+ "<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link option-remove\">Remover</button>"
-												+ "<input type=hidden name=command value=DeleteBook>"
+							if(role != null){
+							out.print("<div class=option-view>" 
+									+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-view\">View</button>"
+									+ "<input type=hidden name=command value=getDetails>"
+									+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
+								+ "</div>");
+								if(role == 1){
+									out.print("<div>");//3
+										out.print("<div class=option-edit>" 
+												+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-edit\">Editar</button>"
+												+ "<input type=hidden name=command value=EditBook>"
 												+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
 											+ "</div>");
-								out.print("</div>");//3
+										out.print("<div class=option-remove>" 
+													+ "<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link option-remove\">Remover</button>"
+													+ "<input type=hidden name=command value=DeleteBook>"
+													+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
+												+ "</div>");
+									out.print("</div>");//3
+								}
 							}
 							out.print("</div>");//2
 							
