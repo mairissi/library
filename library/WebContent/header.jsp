@@ -18,14 +18,16 @@
             <% String user = (String) request.getSession().getAttribute("user");
         
 	        	if (user == null) {
+	        		out.print("<div class=\"pull-right\">");
 	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
 	        		out.print("<input class=\"form-control login-input\" placeholder=\"E-mail\" name=\"email\" type=\"email\" autofocus=\"\" />");
 	        		out.print("<input class=\"form-control login-input\" placeholder=\"Senha\" name=\"password\" type=\"password\" value=\"\" />");
 	        		out.print("<input id=\"Login\" name=\"Login\" class=\"btn submit\" type=\"Submit\" value=\"Login\" />");
 	        		out.print("<input type=hidden name=command value=Login />");
+	        		out.print("</form>");
 	        		out.print("<br>");
 	        		out.print("<a class=\"login-container-link\" href=\"signUp.jsp\">Não possui conta? Cadastre-se aqui</a>");
-	        		out.print("</form>");
+	        		out.print("</div>");
 	        	}
 	        	else {
 	        		out.print("<form method=\"post\" action=\"control\" class=\"pull-right\">");
