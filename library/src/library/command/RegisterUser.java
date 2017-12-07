@@ -24,7 +24,7 @@ public class RegisterUser implements Command {
 				UserDAO.addUser(user);
 				request.setAttribute("message", "Usuário cadastrado com sucesso!");
 				request.setAttribute("alert", "alert alert-success");
-				return "index.jsp";
+				return "allBooks.jsp";
 			}catch(SQLIntegrityConstraintViolationException sqle){
 				request.setAttribute("message", "CPF já cadastrado!");
 				request.setAttribute("alert", "alert alert-danger");
