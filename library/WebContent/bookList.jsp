@@ -75,7 +75,7 @@
 								</div>
 								<div class=pull-left>
 									<form method=post action=control>
-										<button type=Submit class="btn btn-default btn-edit">Excluir</button>
+										<button type=Submit class="btn btn-default btn-edit">Rejeitar</button>
 										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
 										<input type=hidden name=command value=DeleteBook>
 									</form>

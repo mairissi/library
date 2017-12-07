@@ -76,8 +76,8 @@
 			</div>
 			<div class="faq_answer_container">
 				<div class="faq_answer">
-					Sim. Na sessão do usuário é possível vizualizar o menu "MEUS LIVROS" que mostram todo o seu 
-					histórico de empréstimos e que permite realizar a renovação dos livros que ainda não foram devolvidos.
+					Sim. Na sessão do usuário é possível vizualizar o menu "MEUS LIVROS" que mostra todos seus empréstimos e 
+					permite realizar a renovação dos livros que ainda não foram devolvidos.
 				</div>
 			</div>		
 		</div>
@@ -109,8 +109,8 @@
 			</div>
 			<div class="faq_answer_container">
 				<div class="faq_answer">
-					Caso você não tenha realizado as 3 (três) renovações online e o botão RENOVAR não esteja aparecendo na 
-					tela de MEUS LIVROS podem ser as seguintes situações:<br>
+					Caso o botão RENOVAR não esteja aparecendo na tela de MEUS LIVROS podem ser as seguintes situações:
+					<br>
 					<li> Já foi atingido a quantidade máxima de 3(três) renovações online.</li>
 					<li> Alguém reservou (entrou para a lista de espera) do livro que você está tentando renovar.</li>
 					<li> Você está atrasado com alguma devolução.</li>
@@ -128,7 +128,7 @@
 					de dias em que esteve atraso. Exemplo: Caso você atrase em 10(dez) dias a devolução de algum dos livros, 
 					o sistema te bloqueará durante 20 (vinte).</li>
 					<li> Caso a sua situação esteja irregular na COMUNITECA, não será 
-					possível também realizar renovações ou reservas.</li>
+					possível também realizar empréstimos, renovações ou reservas.</li>
 				</div>
 			</div>		
 		</div>
