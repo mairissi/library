@@ -13,7 +13,7 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 	
 	<%@include file="header.jsp" %>
 	
-	<% Book book = BookDAO.getBook(2); %>
+	<% 	Book book = BookDAO.getBook( (Integer) request.getAttribute("isbn")); %>
 			
 		<div class="container" style="margin-top: 150px; margin-right: auto; margin-left: auto;">
 			<div class="col-md-4" style="float: left;">

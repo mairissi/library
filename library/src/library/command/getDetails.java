@@ -11,15 +11,11 @@ public class getDetails implements Command {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 				throws Exception {
-		int isbn = Integer.parseInt(request.getParameter("isbn"));
-		Book book = BookDAO.getBook(isbn);
-		request.setAttribute("title", book.getTitle());
-		request.setAttribute("author", book.getAuthor());
-		request.setAttribute("isbn", Integer.toString(book.getIsbn()));
-		request.setAttribute("publisher", book.getPublisher());
-		request.setAttribute("description", book.getDescription());
-		request.setAttribute("imgurl", book.getImgUrl());
-		
-		return "bookDescription.jsp";
+		Integer isbn = Integer.parseInt(request.getParameter("isbn"));
+		if(isbn != null) {
+			request.setAttribute("isbn", isbn);		
+			return "bookDescription.jsp";
+		}
+		return "bookList.jsp";
 	}
 }
