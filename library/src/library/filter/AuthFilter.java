@@ -34,8 +34,9 @@ public class AuthFilter implements Filter {
         boolean isIndexURI = isIndexURI(request);
         boolean isStaticResource = request.getRequestURI().contains("/resources/");
         boolean isSignUp = request.getRequestURI().contains("signUp.jsp");
+        boolean isFAQ = request.getRequestURI().contains("faq.jsp");
         
-        boolean allowRequest = isStaticResource || isIndexURI || loggedIn || signUpCommand || loginCommand || isSignUp;
+        boolean allowRequest = isStaticResource || isIndexURI || loggedIn || signUpCommand || loginCommand || isSignUp || isFAQ;
         
         if (allowRequest) {
             chain.doFilter(request, response);

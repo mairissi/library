@@ -177,3 +177,34 @@ img {
 	display: block; 
 	margin: 0 auto;
 }
+
+.faq_question {
+	margin: 0px;
+	padding: 0px 0px 15px 0px;
+	display: inline-block;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 25px;
+	color: #BB0084;
+	text-align: justify;
+}
+
+.faq_answer_container {
+	height: 0px;
+	overflow: hidden;
+	padding: 0px;
+	text-align: justify;
+}
+
+.faq_answer {
+	font-size: 22px;
+	padding-left: 30px;
+	font-weight: bold;
+	text-align: justify;
+}
+
+.faq_answer > li {
+	padding-left: 15px;
+	padding-top: 5px;
+	text-align: justify;
+}

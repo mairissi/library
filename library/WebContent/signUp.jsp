@@ -12,7 +12,7 @@
 
 <body>
     <%@include file="header.jsp" %>
-    <form class="form-horizontal" style="margin-top: 80px" method=post action=control>
+    <form class="form-horizontal" style="margin-top: 120px" method=post action=control>
 		<%
 			String message = (String) request.getAttribute("message");
 			String alert = (String) request.getAttribute("alert");

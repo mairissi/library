@@ -66,7 +66,7 @@
                 		
                 	%>
                     
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="faq.jsp">FAQ</a></li>
                 </ul>
             </div>
         </div>

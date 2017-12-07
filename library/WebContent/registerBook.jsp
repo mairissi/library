@@ -18,12 +18,12 @@
     <div class="container" style="margin-top: 80px">
         <div class="panel-body">
             <div class="form-group">
-                    <div class="col-md-12 control-label">
-                        <p class="help-block" style="text-align: end">
-                            <h11>*</h11> Campo Obrigatório </p>
-                    </div>
+                <div class="col-md-12 control-label">
+                    <p class="help-block" style="text-align: end">
+                        <h11>*</h11> Campo Obrigatório </p>
                 </div>
-                </div>
+            </div>
+        </div>
         <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
         
         <% String isbn = (String) request.getAttribute("isbn"); %>
