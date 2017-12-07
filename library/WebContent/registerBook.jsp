@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page 
+	import="library.dao.BookDAO"
+	import="library.model.Book"
+language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +29,13 @@
         </div>
         <form class="form-horizontal" style="margin-top: 10px" method=post action=control>
         
-        <% String isbn = (String) request.getAttribute("isbn"); %>
+        <% 
+        	String isbn = (String) request.getAttribute("isbn");
+        	Book book = null;
+        	if(isbn != null){
+        		book = BookDAO.getBook(Integer.parseInt(isbn));
+        	}
+        %>
         
             <!-- Text input-->
             <div class="form-group">
@@ -35,7 +44,7 @@
                 </label>
                 <div class="col-md-11">
                     <input id="Titulo" name="title" placeholder="" class="form-control input-md" required="" type="text" value="<%
-                    		if(isbn!=null){out.println(request.getAttribute("title"));}%>">
+                    		if(book!=null){out.println(book.getTitle());}%>">
                 </div>
             </div>
         
@@ -46,7 +55,7 @@
                 </label>
                 <div class="col-md-11">
                     <input id="Autor" name="author" placeholder="" class="form-control input-md" required="" type="text" value="<%
-                    		if(isbn!=null){out.println(request.getAttribute("author"));}%>">
+                    		if(book!=null){out.println(book.getAuthor());}%>">
                 </div>
             </div>
             
@@ -56,7 +65,7 @@
                 </label>
                 <div class="col-md-10">
                     <input id="IMR_URL" name="image_url" placeholder="" class="form-control input-md" required="" type="text" value="<%
-                    		if(isbn!=null){out.println(request.getAttribute("image_url"));}%>">
+                    		if(book!=null){out.println(book.getImgUrl());}%>">
                 </div>
             </div>
 
@@ -66,7 +75,7 @@
                 </label>
                 <div class="col-md-3">
                     <input id="ISBN" name="isbn" placeholder="Somente números" class="form-control input-md" required="" type="text" maxlength="13" value="<%
-                    		if(isbn!=null){out.println(isbn);}%>" <%if(isbn!=null){out.println(" readonly");}%>>
+                    		if(book!=null){out.println(isbn);}%>" <%if(isbn!=null){out.println(" readonly");}%>>
                 </div>
 
                 <label class="col-md-2 control-label" for="Editora" style="text-align:right">Editora
@@ -74,7 +83,7 @@
                 </label>
                 <div class="col-md-6">
                     <input id="Editora" name="publisher" placeholder="" class="form-control input-md" required="" type="text" value="<%
-                    		if(isbn!=null){out.println(request.getAttribute("publisher"));}%>">
+                    		if(book!=null){out.println(book.getPublisher());}%>">
                 </div>
 
             </div>
@@ -85,11 +94,11 @@
                 </label>
                 <div class="col-md-12">
                     <textarea id="Descricao" name="description" placeholder="" required=""
-                        style="width:-webkit-fill-available; height: 200px; resize:none;"><%if(isbn!=null){out.println(request.getAttribute("description"));}%></textarea>
+                        style="width:-webkit-fill-available; height: 200px; resize:none;"><%if(book!=null){out.println(book.getDescription());}%></textarea>
                 </div>
             </div>
-            <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value=<% if(isbn==null) out.println("Doar"); else out.print("Editar");%>>
-            <input type=hidden name=command value=<% if(isbn==null) out.println("RegisterBook"); else out.print("UpdateBook");%>>
+            <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value=<% if(book==null) out.println("Doar"); else out.print("Editar");%>>
+            <input type=hidden name=command value=<% if(book==null) out.println("RegisterBook"); else out.print("UpdateBook");%>>
             <% 
             	String message = (String) request.getAttribute("message");
             	String alert = (String) request.getAttribute("alert");

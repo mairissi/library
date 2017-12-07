@@ -10,7 +10,7 @@
 <body>
     
     <div class="container navbar-fixed-top header">                            
-        <img class="logo" src="resources/images/logo.png" href="index.jsp" />
+        <a href="/library"><img class="logo" src="resources/images/logo.png"/></a>
 
         
         <!-- Renderizar apenas se o usuário não estiver logado -->
