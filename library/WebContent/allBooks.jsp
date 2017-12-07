@@ -15,11 +15,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/style.css">
+		<%@include file="header.jsp" %>
 	</head>
 	
 	<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-	<%	Integer role = (Integer) request.getAttribute("role");	%>
-		<%@include file="header.jsp" %>
+	<% Integer role = null;
+		objRole = request.getSession().getAttribute("role");
+	    if (objRole != null) {
+	    	role = Integer.parseInt(objRole.toString());
+	    }
+    %>
+		
 		
 
 		<div class="container" style="margin-top: 150px">

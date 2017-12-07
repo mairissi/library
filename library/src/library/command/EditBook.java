@@ -19,8 +19,6 @@ public class EditBook implements Command {
 		request.setAttribute("publisher", book.getPublisher());
 		request.setAttribute("description", book.getDescription());
 		request.setAttribute("imgurl", book.getImgUrl());
-		request.setAttribute("alert", "alert alert-success");
-		request.setAttribute("message", "Livro removido com sucesso!");
 		request.setAttribute("role", 1);
 		
 		return "registerBook.jsp";

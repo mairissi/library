@@ -55,7 +55,8 @@
                 			
                 			if (roleHeader == 1) {
                     			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");
-                    			out.print("<li><a href=\"#\">GERENCIAR LIVROS</a></li>");
+                    			out.print("<li><a href=\"bookList.jsp\">GERENCIAR LIVROS</a></li>");
+                    			out.print("<li><a href=\"signUp.jsp\">CADASTRAR USUÁRIO</a></li>");
                     		} else if (roleHeader == 2) {
                     			out.print("<li><a href=\"#\">MEUS LIVROS</a></li>");
                     		} else if (roleHeader == 3) {
