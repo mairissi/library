@@ -74,8 +74,34 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 				
 					if (role != null) {						
 						if (Integer.parseInt(role.toString()) == 1) {
-							out.print("<button type=\"submit\" class=\"btn btn-default\" name=\"command\" value=\"BorrowBook\" " + avaible + ">Efetuar Empréstimo</button>");
-						} else if (Integer.parseInt(role.toString()) == 2) {
+						%>
+						<td><center>
+						<div class=row style="align-content: center;">
+							<div class=pull-left>
+								<form method=post action=control>
+									<button type=Submit class="btn btn-default btn-edit">Editar</button>
+									<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+									<input type=hidden name=command value=EditBook>
+								</form>
+							</div>
+							<div class=pull-left>
+								<form method=post action=control>
+									<button type=Submit class="btn btn-default btn-edit">Aceitar</button>
+									<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+									<input type=hidden name=command value=Approve>
+								</form>
+							</div>
+							<div class=pull-left>
+								<form method=post action=control>
+									<button type=Submit class="btn btn-default btn-edit">Rejeitar</button>
+									<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+									<input type=hidden name=command value=DeleteBook>
+								</form>
+							</div>
+						</div>
+						</center></td>
+					<%
+					} else if (Integer.parseInt(role.toString()) == 2) {
 							out.print("<button type=\"submit\" class=\"btn btn-default\" name=\"command\" value=\"ReserveBook\">Reservar</button>");
 							out.print("<button type=\"submit\" class=\"btn btn-default\" name=\"command\" value=\"RenewBorrow\">Renovar</button>");
 						}

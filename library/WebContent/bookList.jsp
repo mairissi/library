@@ -61,9 +61,9 @@
 							<div class=row style="align-content: center;">
 								<div class=pull-left>
 									<form method=post action=control>
-										<button type=Submit class="btn btn-default btn-edit">Editar</button>
+										<button type=Submit class="btn btn-default btn-edit">Aceitar</button>
 										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
-										<input type=hidden name=command value=EditBook>
+										<input type=hidden name=command value=Approve>
 									</form>
 								</div>
 								<div class=pull-left>
