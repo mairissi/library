@@ -54,7 +54,8 @@ public class BookDAO {
 	public static ArrayList<Book> getBooks(int status) {
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select * from book where STATUS_ID = " + status + " order by lower(TITLE)");
+			ps = conn.prepareStatement("select * from book where STATUS_ID = ? order by lower(TITLE)");
+			ps.setInt(1, status);
 			rs = ps.executeQuery();
 			ArrayList<Book> listBook = new ArrayList<Book>();
 			
@@ -84,7 +85,8 @@ public class BookDAO {
 	public static Book getBook(int isbn) {
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select * from book where isbn = " + isbn);
+			ps = conn.prepareStatement("select * from book where isbn = ?");
+			ps.setInt(1, isbn);
 			rs = ps.executeQuery();
 			
 			Book book = new Book();

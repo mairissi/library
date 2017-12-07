@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import library.dao.BookDAO;
 import library.model.Book;
 
-public class EditBook implements Command {
+public class getDetails implements Command {
 	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
@@ -20,6 +20,6 @@ public class EditBook implements Command {
 		request.setAttribute("description", book.getDescription());
 		request.setAttribute("imgurl", book.getImgUrl());
 		
-		return "registerBook.jsp";
+		return "bookDescription.jsp";
 	}
 }
