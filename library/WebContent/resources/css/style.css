@@ -141,11 +141,46 @@ br {
     text-align: center;
 }
 
+.option-edit:hover {
+    background: #9f9f9f;
+    width: 124px;
+    float: left;
+    color: #d7d7d7;
+    border: none;
+    text-align: center;
+}
+
 .option-remove {
+    background: #aa0000;
+    width: 124px;
+    float: left;
+    color: #d7d7d7;
+    text-align: center;
+}
+
+.option-remove:hover {
     background: #cc0000;
     width: 124px;
     float: left;
     color: #d7d7d7;
+    border: none;
+    text-align: center;
+}
+
+.option-view {
+    background: #990066;
+    width: 248px;
+    float: left;
+    color: #CCC;
+    border: none;
+    text-align: center;
+}
+
+.option-view:hover {
+    background: #BB0066;
+    width: 248px;
+    float: left;
+    color: white;
     text-align: center;
 }
 
@@ -170,12 +205,20 @@ br {
 	widows: 30px;
 }
 
+.btn-list{
+	float: left;
+}
+
 
 img {
 	width: 200px; 
 	height: 250px; 
 	display: block; 
 	margin: 0 auto;
+}
+
+th {
+	text-align: left;
 }
 
 .faq_question {

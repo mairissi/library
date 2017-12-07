@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page
+	import="library.dao.BookDAO"
+	import="library.model.Book"
+	import="java.util.ArrayList"
+ language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,11 +25,12 @@
 					<th>Autor</th>
 					
 					<% 
-					
+					ArrayList<Book> books = null;
 					if (role != null) {
 						int roleInt = Integer.parseInt(role.toString());
 						
 						if (roleInt == 1) {
+							books = BookDAO.getBooks(1);
 							out.print("<th>Ação</th>");
 						} else if (roleInt == 2) {
 							out.print("<th>Devolução</th>");
@@ -41,18 +46,43 @@
 				</tr>
 			</thead>
 			<tbody>
+			<% for(Book book : books){ %>
 				<tr>
-					<td>O Guia do Mochileiro das Galáxias</td>
-					<td>Douglas Adams</td>
+					<td><% out.print(book.getTitle()); %></td>
+					<td><% out.print(book.getAuthor()); %></td>
 					
-					<% 
-					
+					<%					
 					if (role != null) {
 						int roleInt = Integer.parseInt(role.toString());
 						
 						if (roleInt == 1) {
-							out.print("<td><td><button type=\"button\" class=\"btn btn-default\">Editar</button></td></td>");
-							out.print("<td><td><button type=\"button\" class=\"btn btn-default\">Excluir</button></td></td>");
+						%>
+							<td><center>
+							<div class=row style="align-content: center;">
+								<div class=pull-left>
+									<form method=post action=control>
+										<button type=Submit class="btn btn-default btn-edit">Aceitar</button>
+										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+										<input type=hidden name=command value=Approve>
+									</form>
+								</div>
+								<div class=pull-left>
+									<form method=post action=control>
+										<button type=Submit class="btn btn-default btn-edit">Ver Detalhes</button>
+										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+										<input type=hidden name=command value=getDetails>
+									</form>
+								</div>
+								<div class=pull-left>
+									<form method=post action=control>
+										<button type=Submit class="btn btn-default btn-edit">Excluir</button>
+										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
+										<input type=hidden name=command value=DeleteBook>
+									</form>
+								</div>
+							</div>
+							</center></td>
+						<%
 						} else if (roleInt == 2) {
 							out.print("<td>27/11/2017</td>");
 							out.print("<td><button type=\"button\" class=\"btn btn-default\">Renovar</button></td>");
@@ -65,30 +95,7 @@
 					%>
 					
 				</tr>
-				<tr>
-					<td>O Oceano no Fim do Caminho</td>
-					<td>Neil Gaiman</td>
-					
-					<% 
-					
-					if (role != null) {
-						int roleInt = Integer.parseInt(role.toString());
-						
-						if (roleInt == 1) {
-							out.print("<td><td><button type=\"button\" class=\"btn btn-default\">Editar</button></td></td>");
-							out.print("<td><td><button type=\"button\" class=\"btn btn-default\">Excluir</button></td></td>");
-						} else if (roleInt == 2) {
-							out.print("<td>30/11/2017</td>");
-							out.print("<td><button type=\"button\" class=\"btn btn-default disabled\">Renovar</button></td>");
-							out.print("<td style=\"text-align:center\">3/3</td>");
-						} else if (roleInt == 3) {
-							out.print("<td>Pendente</td>");
-						}
-					}
-					
-					%>
-		
-				</tr>
+				<% } %>
 			</tbody>
 		</table>
 	</div>

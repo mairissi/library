@@ -54,10 +54,10 @@
                 			int roleHeader = Integer.parseInt(objRole.toString());
                 			
                 			if (roleHeader == 1) {
-                    			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");
-                    			out.print("<li><a href=\"#\">GERENCIAR LIVROS</a></li>");
+                    			out.print("<li><a href=\"bookList.jsp\">DOAÇÕES</a></li>");
+                    			out.print("<li><a href=\"signUp.jsp\">CADASTRAR USUÁRIO</a></li>");
                     		} else if (roleHeader == 2) {
-                    			out.print("<li><a href=\"#\">MEUS LIVROS</a></li>");
+                    			out.print("<li><a href=\"bookList.jsp\">MEUS LIVROS</a></li>");
                     		} else if (roleHeader == 3) {
                     			out.print("<li><a href=\"registerBook.jsp\">DOAR LIVRO</a></li>");
                     			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");

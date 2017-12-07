@@ -162,6 +162,15 @@
                 </div>
             </div>
             
+            <% Integer role = null;
+				objRole = request.getSession().getAttribute("role");
+			    if (objRole != null) {
+			    	role = Integer.parseInt(objRole.toString());
+			    }
+			    
+			    if(role != null && role == 1){
+		    %>
+            
             <div class="form-group">
                 <label class="col-md-1 control-label" for="prependedtext" style="text-align:left; margin-left: 105px;">Role</label>
                 <div class="col-md-2">
@@ -174,6 +183,8 @@
 		                </select>
                 </div>
             </div>
+            
+            <% } %>
             
             <!-- Button (Double) -->
             <div class="form-group">
