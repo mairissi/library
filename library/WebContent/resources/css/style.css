@@ -128,6 +128,27 @@ br {
     width: 250px;
     float: left;
 }
+.option {
+    background: #c0c0c0;
+    width: 248px;
+    float: left;
+}
+.option-edit {
+    background: #7f7f7f;
+    width: 124px;
+    float: left;
+    color: #d7d7d7;
+    text-align: center;
+}
+
+.option-remove {
+    background: #cc0000;
+    width: 124px;
+    float: left;
+    color: #d7d7d7;
+    text-align: center;
+}
+
 .info {
     background: #E0E0E0;
     width: 248px;

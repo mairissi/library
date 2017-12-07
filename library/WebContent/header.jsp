@@ -11,17 +11,7 @@
     
     <div class="container navbar-fixed-top header">                            
         <img class="logo" src="resources/images/logo.png" href="index.jsp" />
-        
-        <form method="post" action="control" class="pull-left">
-            <input     type="text" 
-                            id="search-books" 
-                            class="form-control search-input"
-                            placeholder="Pesquisar livro..." />
-            
-            <button type="Submit" class="btn search-button ">
-                    <span class="glyphicon glyphicon-search" />
-            </button>
-        </form>
+
         
         <!-- Renderizar apenas se o usuário não estiver logado -->
         <div>

@@ -32,106 +32,44 @@
         %>
 		</div>
 		
-<div id="post-wrapper" class="post-wrapper clearfix" style="margin: 0 auto; min-width: 800px; max-width: 1600px;">
-
-	<%
-	Integer status = (Integer) request.getAttribute("status");
-	if(status == null){
-		status = 2;
-	}
-	ArrayList<Book> books = BookDAO.getBooks(status);
-	
-	if(books != null){
-		for(Book book : books){
-			out.print("<div class=book>");
-			out.print("<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">");
-			out.print("<div class=info>");
-			out.print("<div class=title>" + book.getTitle() + "</div>");
-			out.print("<div class=author>" + book.getAuthor() + "</div>");
-			out.print("<div class=description>" + book.getDescription() + "</div>");
-			if(role != null && role == 1){
-				out.print("<div align=center>" 
-					+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-pencil\"></span></button>"
-					+ "<input type=hidden name=command value=EditBook>"
-					+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
-					+ "</div>");
-				out.print("<div align=center>" 
-						+ "<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
-						+ "<input type=hidden name=command value=DeleteBook>"
-						+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
-						+ "</div>");
-				/*out.print("<div align=center style=\"margin-left:100px\">");
-				out.print("<div style=\"float: left;\"><form method=post action=control><button title=Editar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-pencil\"></span></button>");
-				out.print("<input type=hidden name=command value=EditBook>");
-				out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form></div>");
-				out.print("</span><span style=\"float:left\">");
-				out.print("<div style=\"float: left;\"><form method=post action=control><button title=Remover type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-trash\"></span></button>");
-				out.print("<input type=hidden name=command value=DeleteBook>");
-				out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form></span></div>");
-				if(status == 1){
-					out.print("<div style=\"float: left;\"<form method=post action=control><button title=Aprovar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-check\"></span></button>");
-					out.print("<input type=hidden name=command value=Approve>");
-					out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form></div>");
-				}
-				out.print("</div>");*/
+		<div id="post-wrapper" class="post-wrapper clearfix" style="margin: 0 auto; min-width: 800px; max-width: 1600px;">
+		
+			<%
+			Integer status = (Integer) request.getAttribute("status");
+			if(status == null){
+				status = 2;
 			}
-			out.print("</div></div>");
-		}
-	}
-	%>
-
-</div>
-
+			ArrayList<Book> books = BookDAO.getBooks(status);
 			
-			
-			<!-- <table class="table">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Título</th>
-						<th>Autor</th>
-						<th>Ação</th>
-					</tr>
-				</thead>
-				<tbody>
-				<% /*
-					Integer status = (Integer) request.getAttribute("status");
-					if(status == null){
-						status = 2;
-					}					
-					ArrayList<Book> books = BookDAO.getBooks(status);					
+			if(books != null){
+				for(Book book : books){
+					out.print("<div class=book>");//1
 					
-					if(books != null){
-						for(Book book : books){
-							if(book != null){
-								out.println("<tr>");
-								out.println("<td>" + book.getIsbn() + "</td>");
-								out.println("<td>" + book.getTitle() + "</td>");
-								out.println("<td>" + book.getAuthor() + "</td>");
-								out.print("<td><span style=\"float:left\">");
-								if(role == 1){
-								out.print("<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-pencil\"></span></button>");
-								out.print("<input type=hidden name=command value=EditBook>");
-								out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form>");
-								out.print("</span><span style=\"float:left\">");
-								out.print("<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-trash\"></span></button>");
-								out.print("<input type=hidden name=command value=DeleteBook>");
-								out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form></span>");
-									if(status == 1){
-									out.print("<form method=post action=control><button title=Aprovar type=Submit class=\"btn btn-link\"><span class=\"glyphicon glyphicon-check\"></span></button>");
-									out.print("<input type=hidden name=command value=Approve>");
-									out.print("<input type=hidden name=isbn value=" + book.getIsbn() + "></form>");
-									}
-								} else {
-									
-								}
-								out.print("</td>");
-								out.println("</tr>");
+						out.print("<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">");
+						out.print("<div class=option>");//2
+							out.print("<div class=title>" + book.getTitle() + "</div>");
+							out.print("<div class=author>" + book.getAuthor() + "</div>");
+							if(role != null && role == 1){
+								out.print("<div>");//3
+									out.print("<div class=option-edit>" 
+											+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-edit\">Editar</button>"
+											+ "<input type=hidden name=command value=EditBook>"
+											+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
+										+ "</div>");
+									out.print("<div class=option-remove>" 
+												+ "<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link option-remove\">Remover</button>"
+												+ "<input type=hidden name=command value=DeleteBook>"
+												+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
+											+ "</div>");
+								out.print("</div>");//3
 							}
-						}
-					}
-				*/ %>
-				</tbody>
-			</table> -->
+							out.print("</div>");//2
+							
+					out.print("</div>");//1
+				}
+			}
+			%>
+		
+		</div>
 	</body>
 </html>

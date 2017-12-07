@@ -32,20 +32,21 @@ public class AuthFilter implements Filter {
         boolean signUpCommand = "RegisterUser".equals(command);
         boolean loggedIn = session.getAttribute("user") != null;;
         boolean isIndexURI = isIndexURI(request);
-        boolean isStaticResource = request.getRequestURI().startsWith("/resources/");
+        boolean isStaticResource = request.getRequestURI().contains("/resources/");
+        boolean isSignUp = request.getRequestURI().contains("signUp.jsp");
         
-        boolean allowRequest = isStaticResource || isIndexURI || loggedIn || signUpCommand || loginCommand;
+        boolean allowRequest = isStaticResource || isIndexURI || loggedIn || signUpCommand || loginCommand || isSignUp;
         
         if (allowRequest) {
             chain.doFilter(request, response);
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("allBooks.jsp");
         }
 		
 	}
 	
 	private boolean isIndexURI(HttpServletRequest request) {
-		String indexURI = request.getContextPath() + "/index.jsp";
+		String indexURI = request.getContextPath() + "/allBooks.jsp";
 		return (request.getRequestURI().equals(indexURI)) || (request.getRequestURI().equals(request.getContextPath()));
 	}
 	

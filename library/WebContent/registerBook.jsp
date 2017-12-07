@@ -88,8 +88,8 @@
                         style="width:-webkit-fill-available; height: 200px; resize:none;"><%if(isbn!=null){out.println(request.getAttribute("description"));}%></textarea>
                 </div>
             </div>
-            <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value="Doar">
-            <input type=hidden name=command value=RegisterBook>
+            <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value=<% if(isbn!=null) out.println("Doar"); else out.print("Editar");%>>
+            <input type=hidden name=command value=<% if(isbn!=null) out.println("RegisterBook"); else out.print("UpdateBook");%>>
             <% 
             	String message = (String) request.getAttribute("message");
             	String alert = (String) request.getAttribute("alert");
