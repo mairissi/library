@@ -73,7 +73,8 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 					Object role = request.getSession().getAttribute("role");
 				
 					if (role != null) {						
-						if (Integer.parseInt(role.toString()) == 1) {
+						int parsedRole = Integer.parseInt(role.toString());
+						if (parsedRole == 1) {
 						%>
 						<td><center>
 						<div class=row style="align-content: center;">
@@ -104,15 +105,17 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 						</div>
 						</center></td>
 					<%
-					} else if (Integer.parseInt(role.toString()) == 2) {
-							out.print("<button type=\"submit\" class=\"btn btn-default\" name=\"command\" value=\"ReserveBook\">Reservar</button>");
-							out.print("<button type=\"submit\" class=\"btn btn-default\" name=\"command\" value=\"RenewBorrow\">Renovar</button>");
+					} else if ((parsedRole == 2) || (parsedRole == 3)) { %>
+						<button type="submit" class="btn btn-default" name="command" value="BorrowBook">Emprestar</button>
+						<button type="submit" class="btn btn-default" name="command" value="ReserveBook">Reservar</button>
+						<%
 						}
 					}
 				
 				%>
 				
-
+				<input type=hidden name=isbn value= <% out.print(book.getIsbn()); %>>
+				<input type=hidden name=cpf value= <% out.print(request.getSession().getAttribute("cpf")); %> >
 			</form>
 		</div>
 

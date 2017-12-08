@@ -45,6 +45,7 @@ public class RenewBorrow extends BookControlCommand {
 	protected BookControl createBookControlFromRequest(HttpServletRequest request) {
 		BookControl bc = super.createBookControlFromRequest(request);
 		bc.setExpireDate(super.getExpireDateForBorrow());
+		bc.setCode(Integer.parseInt(request.getParameter("code").toString()));
 		
 		return bc;
 	}

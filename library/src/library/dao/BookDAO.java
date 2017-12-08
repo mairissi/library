@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import library.enums.BookEnum;
 import library.enums.BookStatus;
 import library.model.Book;
+import library.model.BookControl;
 import library.util.ConnectionFactory;
 
 public class BookDAO {
@@ -80,6 +82,51 @@ public class BookDAO {
 		} finally {
 			ConnectionFactory.closeConnection(conn);
 		}
+	}
+	
+	public static ArrayList<Book> getBooksFromControls(List<BookControl> controls) {
+		ArrayList<Book> books = new ArrayList<>();
+		try {
+			String sql = "SELECT * FROM BOOK WHERE ISBN = ? AND CODE = ?";
+			conn = ConnectionFactory.getConnection();
+			
+			for (BookControl control : controls) {
+				ps = conn.prepareStatement(sql);
+				
+				int index = 1;
+				ps.setInt(index++, control.getIsbn());
+				ps.setInt(index++, control.getCode());
+				
+				ResultSet rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					Book book = new Book();
+					book.setIsbn(control.getIsbn());
+					book.setCode(control.getCode());
+					book.setAuthor(rs.getString("AUTHOR"));
+					book.setTitle(rs.getString("TITLE"));
+					book.setPublisher(rs.getString("PUBLISHER"));
+					book.setDescription(rs.getString("DESCRIPTION"));
+					book.setImgUrl(rs.getString("IMG_URL"));
+					book.setStatus(rs.getInt("STATUS_ID"));
+					
+					books.add(book);
+				}
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();		
+		} finally {
+			ConnectionFactory.closeConnection(conn);
+		}
+		
+		return books;
+	}
+	
+	public static ArrayList<Book> getBooksFromUser(String cpf) {
+		BookControlDAO controlDAO = new BookControlDAO();
+		List<BookControl> bookControlList = controlDAO.getBooksFromUser(cpf);
+		return getBooksFromControls(bookControlList);	
 	}
 	
 	public static Book getBook(int isbn) {
@@ -204,7 +251,32 @@ public class BookDAO {
 		
 		return 0;
 	}
-
+	
+	public static int getFirstAvailableCode(int isbn) {
+		String sql = "SELECT MIN(CODE) FROM BOOK WHERE ISBN = ? AND STATUS_ID = ?";
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, isbn);
+			ps.setInt(2, BookStatus.AVAILABLE.id());
+			
+			ResultSet resultSet = ps.executeQuery();
+			
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(conn);
+		}
+		
+		return -1;
+	}
+	
 	public int getStatus(int isbn, int code) {
 		String sql = "SELECT * FROM BOOK WHERE ISBN = ? AND CODE = ?";	
 		

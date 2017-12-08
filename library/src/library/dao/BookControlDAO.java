@@ -196,6 +196,42 @@ public class BookControlDAO {
 		
 		return calendar.getTimeInMillis();
 	}
+
+	public ArrayList<BookControl> getBooksFromUser(String cpf) {
+		ArrayList<BookControl> books = new ArrayList<>();
+		
+		try {
+			String sql = "SELECT * FROM BOOK_CONTROL WHERE USER_CPF = ?";
+			
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+									
+			int index = 1;
+			preparedStatement.setString(index++, cpf);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				BookControl book = new BookControl();
+				book.setIsbn(rs.getInt("BOOK_ISBN"));
+				book.setCode(rs.getInt("BOOK_CODE"));
+				book.setUserCpf(cpf);
+				book.setExpireDate(rs.getLong("EXPIRE_DATE"));
+				book.setRenewalNumber(rs.getInt("RENEWAL_NUMBER"));
+				
+				books.add(book);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				ConnectionFactory.closeConnection(connection);
+			}
+		}
+		
+		return books;
+	}
 	
 //	try {
 //		String sql = "DELETE FROM BOOK_CONTROL WHERE BOOK_ISBN = ? AND BOOK_CODE = ? AND USER_CPF = ?";

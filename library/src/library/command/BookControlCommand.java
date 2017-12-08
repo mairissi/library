@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import library.dao.BlockedUsersDAO;
 import library.dao.BookControlDAO;
+import library.dao.BookDAO;
 import library.model.BookControl;
 
 public abstract class BookControlCommand implements Command {
@@ -24,9 +25,8 @@ public abstract class BookControlCommand implements Command {
 		BookControl bc = new BookControl();
 		
 		bc.setIsbn(Integer.parseInt(request.getParameter("isbn")));
-		bc.setCode(Integer.parseInt(request.getParameter("code")));
 		bc.setUserCpf(request.getParameter("cpf"));
-		
+				
 		return bc;
 	}
 	
@@ -56,7 +56,7 @@ public abstract class BookControlCommand implements Command {
 		boolean isUserBlocked = blockedUsersDAO.isBlocked(bc.getUserCpf());
 		
 		if (!isUserBlocked) {
-			return dao.canRenewBook(bc.getUserCpf(), bc.getIsbn(), bc.getCode());
+			return dao.canBorrow(bc.getUserCpf());
 		}
 		
 		return false;

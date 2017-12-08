@@ -17,31 +17,37 @@ public class BorrowBook extends BookControlCommand {
 		BookControl control = createBookControlFromRequest(request);
 		BookControlDAO dao = getDao();
 		
-		if (canBorrowBook(control)) {
-			if (dao.add(control)) {
+		if (control.getCode() != -1) {
+			if (canBorrowBook(control)) {
+				if (dao.add(control)) {
+					
+					Book book = new Book();
+					book.setIsbn(control.getIsbn());
+					book.setCode(control.getCode());
+					
+					BookDAO.updateStatus(book, BookStatus.BORROWED.id());
+					
+					// success
+					request.setAttribute("alert", "alert alert-success");
+					request.setAttribute("message", "Empréstimo realizado com sucesso!");
+					return "allBooks.jsp";
+				}
 				
-				Book book = new Book();
-				book.setIsbn(control.getIsbn());
-				book.setCode(control.getCode());
+				// error
+				request.setAttribute("alert", "alert alert-danger");
+				request.setAttribute("message", "Erro ao efetuar empréstimo.");
 				
-				BookDAO.updateStatus(book, BookStatus.BORROWED.id());
-				
-				// success
-				request.setAttribute("alert", "alert alert-success");
-				request.setAttribute("message", "Empréstimo realizado com sucesso!");
 				return "allBooks.jsp";
 			}
 			
 			// error
 			request.setAttribute("alert", "alert alert-danger");
-			request.setAttribute("message", "Erro ao efetuar empréstimo.");
-			
-			return "allBooks.jsp";
+			request.setAttribute("message", "O usuário informado não pode efetuar mais empréstimos.");
 		}
-		
-		// error
-		request.setAttribute("alert", "alert alert-danger");
-		request.setAttribute("message", "O usuário informado não pode efetuar mais empréstimos.");
+		else {
+			request.setAttribute("alert", "alert alert-danger");
+			request.setAttribute("message", "Esse livro não está disponível para empréstimos.");
+		}
 		
 		return "allBooks.jsp";
 	}
@@ -51,6 +57,7 @@ public class BorrowBook extends BookControlCommand {
 		BookControl bc = super.createBookControlFromRequest(request);
 		bc.setRenewalNumber(0);
 		bc.setExpireDate(super.getExpireDateForBorrow());
+		bc.setCode(BookDAO.getFirstAvailableCode(bc.getIsbn()));
 		
 		return bc;
 	}

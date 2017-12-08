@@ -1,5 +1,8 @@
 package library.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BookControl {
 	private int isbn;
 	private int code;
@@ -47,4 +50,12 @@ public class BookControl {
 		this.renewalNumber = renewalNumber;
 	}
 	
+	public String getFormattedExpireDate() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return format.format(new Date(getExpireDate()));
+	}
+	
+	public String getRemainingRenewal() {
+		return getRenewalNumber() + "/3";
+	}
 }
