@@ -80,6 +80,8 @@
 							
 					out.print("</div>");//1
 				}
+			}else{
+				out.print("<img class=notFound src=\"resources/images/404.png\">");
 			}
 			%>
 		

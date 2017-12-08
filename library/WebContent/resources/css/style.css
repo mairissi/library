@@ -217,6 +217,13 @@ img {
 	margin: 0 auto;
 }
 
+.notFound {
+	width: 300px; 
+	height: 500px; 
+	display: block; 
+	margin: 0 auto;
+}
+
 th {
 	text-align: left;
 }
