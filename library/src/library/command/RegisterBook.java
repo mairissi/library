@@ -20,6 +20,8 @@ public class RegisterBook extends BookCommand {
 			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro cadastrado com sucesso!");
+			
+			
 			return "allBooks.jsp";
 		}
 		else {

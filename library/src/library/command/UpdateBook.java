@@ -15,12 +15,14 @@ public class UpdateBook extends BookCommand {
 
 		Book book = createBookFromRequest(request);
 		
+		String currentPage = request.getParameter("currentPage");
+		
 		if (BookDAO.updateBook(book)) {
-			System.out.println("Sucess!");
 			request.setAttribute("alert", "alert alert-success");
 			request.setAttribute("message", "Livro atualizado com sucesso!");
 			request.setAttribute("role", Roles.ADMIN.id());
-			
+			if(currentPage != null && !currentPage.equals("null"))
+				return currentPage.substring(currentPage.lastIndexOf("/")+1);
 			return "allBooks.jsp";
 		}
 		else {

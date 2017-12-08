@@ -71,6 +71,7 @@
 										<button type=Submit class="btn btn-default btn-edit">Ver Detalhes</button>
 										<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
 										<input type=hidden name=command value=getDetails>
+										<input type=hidden name=currentPage value="<%out.print(request.getRequestURI());%>">
 									</form>
 								</div>
 								<div class=pull-left>

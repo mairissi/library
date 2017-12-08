@@ -82,6 +82,7 @@ language="java" contentType="text/html; charset=ISO-8859-1"
 									<button type=Submit class="btn btn-default btn-edit">Editar</button>
 									<input type=hidden name=isbn value="<%out.print(book.getIsbn());%>">
 									<input type=hidden name=command value=EditBook>
+									<input type=hidden name=currentPage value="<%out.print(request.getParameter("currentPage"));%>">
 								</form>
 							</div>
 							<% if(book.getStatus() == 1){ %>

@@ -99,6 +99,8 @@ language="java" contentType="text/html; charset=ISO-8859-1"
             </div>
             <input id="Registrar" name="Registrar" class="btn submit" type="Submit" value=<% if(book==null) out.println("Doar"); else out.print("Editar");%>>
             <input type=hidden name=command value=<% if(book==null) out.println("RegisterBook"); else out.print("UpdateBook");%>>
+            <input type=hidden name=currentPage value=<% out.print(request.getParameter("currentPage")); %>>
+            
             <% 
             	String message = (String) request.getAttribute("message");
             	String alert = (String) request.getAttribute("alert");

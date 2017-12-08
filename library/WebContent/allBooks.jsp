@@ -66,7 +66,8 @@
 										out.print("<div class=option-edit>" 
 												+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-edit\">Editar</button>"
 												+ "<input type=hidden name=command value=EditBook>"
-												+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
+												+ "<input type=hidden name=isbn value=" + book.getIsbn() + ">"
+												+ "<input type=hidden name=currentPage value=" + request.getRequestURI() + "></form>"
 											+ "</div>");
 										out.print("<div class=option-remove>" 
 													+ "<form method=post action=control><button title=Remover type=Submit class=\"btn btn-link option-remove\">Remover</button>"
