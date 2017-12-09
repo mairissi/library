@@ -19,8 +19,9 @@
 			
 			ArrayList<Book> books = new ArrayList();
 			
+			books = BookDAO.getBookByCPF(request.getSession().getAttribute("cpf").toString());
+			
 			for (Book book : books) {
-				if (book.getStatus() == BookStatus.PENDING.id()) {
 					%>
 					<tr>
 						<td><% out.print(book.getTitle()); %></td>
@@ -37,7 +38,6 @@
 						<input type=hidden name="code" value= <% out.print(book.getCode()); %> >
 					</tr>
 					<%
-				}
 			}
 			
 			%>
