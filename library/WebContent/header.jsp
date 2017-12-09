@@ -41,14 +41,11 @@
     </div>
         
     <!-- Menu -->
-    
-    
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                	<li><a href="allBooks.jsp">INÍCIO</a></li>
-                	
+                	                	
                 	<% 
                 		Object objRole = request.getSession().getAttribute("role");
                 		
@@ -57,42 +54,25 @@
                 			
                 			if (roleHeader == 1) {
                 				%>
-                				
-                					<li>
-										<form method=post action=bookList.jsp>
-                    						<a href="#" onclick="parentNode.submit();">DOAÇÕES</a>
-                    						<input type=hidden name=pageType value=doacao>
-                    					</form>
-                    				</li>
-                    				
-                    				<li>
-										<form method=post action=bookList.jsp>
-                    						<a href="#" onclick="parentNode.submit();">EMPRÉSTIMOS</a>
-                    						<input type=hidden name=pageType value=emprestimo>
-                    					</form>
-                    				</li>
-                    				
-                    				<li><a href="signUp.jsp">CADASTRAR USUÁRIO</a></li>
-                    					
-                				
+                				<%@include file="include/menu/admin.jsp" %>
                 				<%
-                    		} else {
-                    			out.print("<li><a href=\"bookList.jsp\">MEUS LIVROS</a></li>");
-	                    		if (roleHeader == 3) {
-	                    			out.print("<li><a href=\"registerBook.jsp\">DOAR LIVRO</a></li>"); %>
-	                    			<li>
-									<form method=post action=bookList.jsp>
-                						<a href="#" onclick="parentNode.submit();">DOAÇÕES</a>
-                						<input type=hidden name=requestType value=myDonations>
-                					</form>
-                				</li>
-	                    		<%}
-                			}
+                    		} else if (roleHeader == 2) {
+                    			%>
+                				<%@include file="include/menu/user.jsp" %>
+                				<%
+                    		} else if (roleHeader == 3) {
+                    			%>
+                				<%@include file="include/menu/donator.jsp" %>
+                				<%
+                    		} 
+                		} else {
+                			%>
+            				<%@include file="include/menu/default.jsp" %>
+            				<%
                 		}
                 		
                 	%>
                     
-                    <li><a href="faq.jsp">FAQ</a></li>
                 </ul>
             </div>
         </div>
