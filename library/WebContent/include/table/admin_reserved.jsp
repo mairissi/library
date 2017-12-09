@@ -19,28 +19,31 @@
 			ArrayList<BookControl> controls = new ArrayList();
 			ArrayList<Book> books = new ArrayList();
 			
+			BookControlDAO bcd = new BookControlDAO();
+			
+			books = BookDAO.getBooks(BookStatus.RESERVED.id());
+			
+			System.out.println(books.size());
+			
 			for (Book book : books) {
-				for (BookControl control : controls) {
-					int isbn = control.getIsbn();
-					int code = control.getCode();
-					
-					if (book.getIsbn() == isbn && code == book.getCode()) {
+				
+				String cpf = bcd.getCpf(book);
+
 						%>
 						<tr>
 							<td><% out.print(book.getTitle()); %></td>
 							<td><% out.print(book.getAuthor()); %></td>
-							<td><% out.print(control.getUserCpf()); %></td>
+							<td><% out.print(cpf); %></td>
 							<form method=post action=control>
 							<td><button type="submit" name=command value=BorrowBook class="btn btn-default">Emprestar</button></td>
 							
 							<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
 							<input type=hidden name="code" value= <% out.print(book.getCode()); %> >
-							<input type=hidden name=cpf value=<% out.print(control.getUserCpf()); %>>
+							<input type=hidden name=cpf value=<% out.print(cpf); %>>
 							</form>
 						</tr>
 						<%
-					}
-				}
+
 			}
 			
 			%>
