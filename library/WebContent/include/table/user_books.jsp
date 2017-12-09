@@ -5,13 +5,14 @@
 	import="library.dao.BookControlDAO"
 	import="java.util.ArrayList"
 	import="library.enums.BookStatus"
-	import="library.dao.BookControlDAO" %>
+	import="library.dao.BookControlDAO"
+	import="java.util.Collections"
+	 %>
 
 	<table class="table">
 		<thead>
 			<th>Título</th>
 			<th>Autor</th>
-			<th>Status</th>
 			<th>Devolução</th>
 			<th>Ação</th>
 			<th style="text-align:center">Renovações</th>
@@ -23,6 +24,7 @@
 				
 				controls = controlDAO.getBooksFromUser(request.getSession().getAttribute("cpf").toString());
 				books = BookDAO.getBooksFromControls(controls);
+				Collections.sort(books);				
 				
 				for(Book book : books) { %>
                 <tr>

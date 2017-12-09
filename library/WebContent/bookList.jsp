@@ -13,9 +13,20 @@
 	
 	<div class="container" style="margin-top: 150px">
 				
+		<% 		
+	       	String message = (String) request.getAttribute("message");
+	       	String alert = (String) request.getAttribute("alert");
+	       	if(message != null && alert != null){
+	       		out.println("<div class=\"" + alert + "\">" + message + "</div>");
+	       	}
+        %>
+				
 		<% 
 			Object role = request.getSession().getAttribute("role"); 
 			String pageType = request.getParameter("pageType");	
+			if(pageType == null){
+				pageType = request.getAttribute("pageType").toString();
+			}
 			
 			if (role != null) {
 				int roleInt = Integer.parseInt(role.toString());

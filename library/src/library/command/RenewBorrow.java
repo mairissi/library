@@ -1,5 +1,7 @@
 package library.command;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +15,9 @@ public class RenewBorrow extends BookControlCommand {
 		BookControl control = createBookControlFromRequest(request);
 		BookControlDAO dao = getDao();
 		
+		
+		request.setAttribute("pageType", "donator_books");
+		
 		String cpf = control.getUserCpf();
 		int isbn = control.getIsbn();
 		int code = control.getCode();
@@ -23,22 +28,22 @@ public class RenewBorrow extends BookControlCommand {
 			if (dao.update(control)) {
 				// success
 				request.setAttribute("alert", "alert alert-success");
-				request.setAttribute("message", "RenovaÁ„o realizada com sucesso!");
-				return "allBooks.jsp";
+				request.setAttribute("message", "Renova√ß√£o realizada com sucesso!");
+				return "bookList.jsp";
 			}
 			
 			// error
 			request.setAttribute("alert", "alert alert-danger");
-			request.setAttribute("message", "Erro ao efetuar renovaÁ„o.");
+			request.setAttribute("message", "Erro ao efetuar renova√ß√£o.");
 			
-			return "allBooks.jsp";
+			return "bookList.jsp";
 		}
 		
 		// error
 		request.setAttribute("alert", "alert alert-danger");
-		request.setAttribute("message", "O usu·rio informado n„o pode efetuar mais renovaÁıes para este livro.");
+		request.setAttribute("message", "O usu√°rio informado n√£o pode efetuar mais renova√ß√µes para este livro.");
 		
-		return "allBooks.jsp";
+		return "bookList.jsp";
 	}
 	
 	@Override
