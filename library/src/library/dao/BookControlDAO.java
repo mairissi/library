@@ -48,6 +48,8 @@ public class BookControlDAO {
 	
 	public String getCpf(Book book) {
 		
+		System.out.println(book.getIsbn() + " " + book.getCode());
+		
 		try {
 			   String sql = "SELECT * FROM BOOK_CONTROL WHERE BOOK_ISBN = ? AND BOOK_CODE = ?";
 			   

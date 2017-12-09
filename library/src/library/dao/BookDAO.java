@@ -73,6 +73,7 @@ public class BookDAO {
 				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
 				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
 				book.setCpf(rs.getString(BookEnum.CPF.header()));
+				book.setCode(rs.getInt(BookEnum.CODE.header()));
 				
 				listBook.add(book);
 			}

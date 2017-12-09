@@ -1,3 +1,4 @@
+<%@page import="library.enums.BookEnum"%>
 <%@ page
 	import="library.dao.BookDAO"
 	import="library.model.Book"
@@ -21,7 +22,9 @@
 			
 			BookControlDAO bcd = new BookControlDAO();
 			
-			books = BookDAO.getBooks(5);
+			books = BookDAO.getBooks(BookStatus.BORROWED.id());
+			
+			System.out.println(books.size());
 			
 			for (Book book : books) {
 				
