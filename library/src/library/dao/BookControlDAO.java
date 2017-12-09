@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import library.model.Book;
 import library.model.BookControl;
 import library.util.ConnectionFactory;
 
@@ -44,6 +45,70 @@ public class BookControlDAO {
 			ConnectionFactory.closeConnection(connection);
 		}
 	}
+	
+	public String getCpf(Book book) {
+		
+		try {
+			   String sql = "SELECT * FROM BOOK_CONTROL WHERE BOOK_ISBN = ? AND BOOK_CODE = ?";
+			   
+			   connection = ConnectionFactory.getConnection();
+			    preparedStatement = connection.prepareStatement(sql);
+			    
+			    int index = 1;
+			    preparedStatement.setInt(index++, book.getIsbn());
+			    preparedStatement.setInt(index++, book.getCode());
+			    
+			    ResultSet result =  preparedStatement.executeQuery();
+			    if (result.next()) {
+			     return result.getString("USER_CPF");
+			    }
+			   
+			  } catch (SQLException e) {
+			   e.printStackTrace();
+			  } finally {
+			   ConnectionFactory.closeConnection(connection);
+			  }
+		return null;
+		
+	}
+	
+	public ArrayList<BookControl> getBooks(List<Book> books) {
+		  ArrayList<BookControl> controls = new ArrayList<>();
+		  
+		  
+		  try {
+		   String sql = "SELECT * FROM BOOK_CONTROL WHERE BOOK_ISBN = ? AND BOOK_CODE = ?";
+		   
+		   connection = ConnectionFactory.getConnection();
+		   
+		   for (Book book : books) {
+		    preparedStatement = connection.prepareStatement(sql);
+		    
+		    int index = 1;
+		    preparedStatement.setInt(index++, book.getIsbn());
+		    preparedStatement.setInt(index++, book.getCode());
+		    
+		    ResultSet result =  preparedStatement.executeQuery();
+		    if (result.next()) {
+		     BookControl control = new BookControl();
+		     control.setCode(result.getInt("BOOK_CODE"));
+		     control.setIsbn(result.getInt("BOOK_ISBN"));
+		     control.setUserCpf(result.getString("USER_CPF"));
+		     control.setRenewalNumber(result.getInt("RENEWAL_NUMBER"));
+		     control.setExpireDate(result.getLong("EXPIRE_DATE"));
+		     
+		     controls.add(control);
+		    }
+		   }
+		   
+		  } catch (SQLException e) {
+		   e.printStackTrace();
+		  } finally {
+		   ConnectionFactory.closeConnection(connection);
+		  }
+		  
+		  return controls;
+		 }
 	
 	public boolean update(BookControl control) {
 		try {
