@@ -18,18 +18,28 @@
 			
 			ArrayList<Book> books = new ArrayList();
 			
+			books = BookDAO.getBooks(1);			
+			
 			for (Book book : books) {
 				if (book.getStatus() == BookStatus.PENDING.id()) {
 					%>
 					<tr>
 						<td><% out.print(book.getTitle()); %></td>
 						<td><% out.print(book.getAuthor()); %></td>
-						<form method=post action=control>
-						<td><button type="submit" name=command value=Approve class="btn btn-default">Aprovar</button></td>
-						
-						<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
-						<input type=hidden name="code" value= <% out.print(book.getCode()); %> >
-						</form>
+						<td>
+							<form method=post action=control>
+								<button type="submit" name=command value=Approve class="btn btn-default btn-list">Aprovar</button>						
+								<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
+							</form>
+							<form method=post action=control>
+								<button type="submit" name=command value=getDetails class="btn btn-default btn-list">Ver detalhes</button>						
+								<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
+							</form>
+							<form method=post action=control>
+								<button type="submit" name=command value=DeleteBook class="btn btn-default btn-list">Rejeitar</button>						
+								<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
+							</form>
+						</td>
 					</tr>
 					<%
 				}
