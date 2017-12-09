@@ -22,6 +22,8 @@
 		
 		<% Object role = request.getSession().getAttribute("role"); %>
 		
+		<h1> <% out.print(request.getParameter("pageType")); %> </h1>
+		
 		<form method=post action=control>
 			<table class="table">
 				<thead>
@@ -29,7 +31,8 @@
 						<th>Título</th>
 						<th>Autor</th>
 						
-						<% 
+						<%
+						Object requestType = request.getParameter("requestType");
 						ArrayList<Book> books = new ArrayList();
 						ArrayList<BookControl> controls = new ArrayList();
 						if (role != null) {
@@ -38,7 +41,10 @@
 							if (roleInt == 1) {
 								books = BookDAO.getBooks(1);
 								out.print("<th>Ação</th>");
-							} else if (roleInt == 2) {
+							} else if (requestType != null && requestType.equals("myDonations")){
+								books = BookDAO.getBookByCPF(request.getSession().getAttribute("cpf").toString());
+								out.print("<th>Status</th>");
+							} else if (roleInt == 2 || roleInt == 3) {
 								BookControlDAO controlDAO = new BookControlDAO();
 								controls = controlDAO.getBooksFromUser(request.getSession().getAttribute("cpf").toString());
 								books = BookDAO.getBooksFromControls(controls);
@@ -94,7 +100,23 @@
 								</div>
 								</center></td>
 							<%
-							} else if (roleInt == 2) {								
+							} else if (requestType != null && requestType.equals("myDonations")) {
+								switch(book.getStatus()){
+								case 1:
+									out.print("<td>Aguardando revisão<td>");
+									break;
+								case 2:
+								case 4:
+								case 5:								
+									out.print("<td>Aceito<td>");
+									break;
+								case 3:								
+									out.print("<td>Rejeitado<td>");
+									break;
+								default:
+									out.print("<td>Desconhecido");
+								}
+							} else if (roleInt == 2 || roleInt == 3) {								
 								for (BookControl control : controls) {
 									int isbn = book.getIsbn();
 									int code = book.getCode();

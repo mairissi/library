@@ -26,6 +26,7 @@ public abstract class BookCommand implements Command {
 		book.setPublisher(request.getParameter("publisher"));
 		book.setDescription(request.getParameter("description"));
 		book.setImgUrl(request.getParameter("image_url"));
+		book.setCpf(request.getSession().getAttribute("cpf").toString());
 		
 		return book;
 	}

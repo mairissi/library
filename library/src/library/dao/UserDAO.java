@@ -89,7 +89,7 @@ public class UserDAO {
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps = conn.prepareStatement("select role from accounts where email=? and password=?");
+			ps = conn.prepareStatement("select cpf from accounts where email=? and password=?");
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
 			rs = ps.executeQuery();

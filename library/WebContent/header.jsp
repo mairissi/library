@@ -41,6 +41,8 @@
     </div>
         
     <!-- Menu -->
+    
+    
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -54,14 +56,38 @@
                 			int roleHeader = Integer.parseInt(objRole.toString());
                 			
                 			if (roleHeader == 1) {
-                    			out.print("<li><a href=\"bookList.jsp\">DOAÇÕES</a></li>");
-                    			out.print("<li><a href=\"signUp.jsp\">CADASTRAR USUÁRIO</a></li>");
-                    		} else if (roleHeader == 2) {
+                				%>
+                				
+                					<li>
+										<form method=post action=bookList.jsp>
+                    						<a href="#" onclick="parentNode.submit();">DOAÇÕES</a>
+                    						<input type=hidden name=pageType value=doacao>
+                    					</form>
+                    				</li>
+                    				
+                    				<li>
+										<form method=post action=bookList.jsp>
+                    						<a href="#" onclick="parentNode.submit();">EMPRÉSTIMOS</a>
+                    						<input type=hidden name=pageType value=emprestimo>
+                    					</form>
+                    				</li>
+                    				
+                    				<li><a href="signUp.jsp">CADASTRAR USUÁRIO</a></li>
+                    					
+                				
+                				<%
+                    		} else {
                     			out.print("<li><a href=\"bookList.jsp\">MEUS LIVROS</a></li>");
-                    		} else if (roleHeader == 3) {
-                    			out.print("<li><a href=\"registerBook.jsp\">DOAR LIVRO</a></li>");
-                    			out.print("<li><a href=\"#\">DOAÇÕES</a></li>");
-                    		}
+	                    		if (roleHeader == 3) {
+	                    			out.print("<li><a href=\"registerBook.jsp\">DOAR LIVRO</a></li>"); %>
+	                    			<li>
+									<form method=post action=bookList.jsp>
+                						<a href="#" onclick="parentNode.submit();">DOAÇÕES</a>
+                						<input type=hidden name=requestType value=myDonations>
+                					</form>
+                				</li>
+	                    		<%}
+                			}
                 		}
                 		
                 	%>

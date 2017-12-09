@@ -24,7 +24,7 @@ public class BookDAO {
 			int code = getLastCode(book.getIsbn()) + 1;
 			
 			conn = ConnectionFactory.getConnection();
-			String sql = "insert into book (isbn, code, title, author, publisher, description, IMG_URL, STATUS_ID) values (?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into book (isbn, code, title, author, publisher, description, IMG_URL, STATUS_ID, cpf) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			ps = conn.prepareStatement(sql);
 			
@@ -37,6 +37,7 @@ public class BookDAO {
 			ps.setString(index++, book.getDescription());
 			ps.setString(index++, book.getImgUrl());
 			ps.setInt(index++, status);
+			ps.setString(index++, book.getCpf());
 			
 			ps.executeUpdate();		
 			
@@ -71,6 +72,7 @@ public class BookDAO {
 				book.setDescription(rs.getString(BookEnum.DESCRIPTION.header()));
 				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
 				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
+				book.setCpf(rs.getString(BookEnum.CPF.header()));
 				
 				listBook.add(book);
 			}
@@ -109,6 +111,7 @@ public class BookDAO {
 					book.setDescription(rs.getString("DESCRIPTION"));
 					book.setImgUrl(rs.getString("IMG_URL"));
 					book.setStatus(rs.getInt("STATUS_ID"));
+					book.setCpf(control.getUserCpf());
 					
 					books.add(book);
 				}
@@ -121,6 +124,38 @@ public class BookDAO {
 		}
 		
 		return books;
+	}
+	
+	public static ArrayList<Book> getBookByCPF(String cpf){
+		try {
+			conn = ConnectionFactory.getConnection();
+			ps = conn.prepareStatement("select * from book where cpf = ?");
+			ps.setString(1, cpf);
+			rs = ps.executeQuery();
+			ArrayList<Book> listBook = new ArrayList<Book>();
+			
+			while(rs.next()) {
+				Book book = new Book();
+				
+				book.setIsbn(rs.getInt(BookEnum.ISBN.header()));
+				book.setTitle(rs.getString(BookEnum.TITLE.header()));
+				book.setAuthor(rs.getString(BookEnum.AUTHOR.header()));
+				book.setPublisher(rs.getString(BookEnum.PUBLISHER.header()));
+				book.setDescription(rs.getString(BookEnum.DESCRIPTION.header()));
+				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
+				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
+				book.setCpf(rs.getString(BookEnum.CPF.header()));
+				
+				listBook.add(book);
+			}
+			
+			return listBook;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			ConnectionFactory.closeConnection(conn);
+		}
 	}
 	
 	public static ArrayList<Book> getBooksFromUser(String cpf) {
@@ -146,6 +181,7 @@ public class BookDAO {
 				book.setDescription(rs.getString(BookEnum.DESCRIPTION.header()));
 				book.setImgUrl(rs.getString(BookEnum.IMG_URL.header()));
 				book.setStatus(rs.getInt(BookEnum.STATUS_ID.header()));
+				book.setCpf(rs.getString(BookEnum.CPF.header()));
 			}
 			
 			return book;

@@ -33,7 +33,7 @@
                 <label class="col-md-1 control-label" for="Nome" style="text-align:left; margin-left: 105px;">Nome
                     <h11>*</h11>
                 </label>
-                <div class="col-md-9">
+                <div class="col-md-5">
                     <input id="Nome" name="name" placeholder="" class="form-control input-md" required="" type="text">
                 </div>
             </div>
@@ -46,15 +46,7 @@
                 <div class="col-md-2">
                     <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11"
                         pattern="[0-9]+$">
-                </div>
-
-                <label class="col-md-1 control-label" for="Nome">Nascimento
-                    <h11>*</h11>
-                </label>
-                <div class="col-md-2">
-                    <input id="dtnasc" name="birthdate" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10"
-                        OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-                </div>                
+                </div>              
             </div>
 
             <!-- Prepended text-->

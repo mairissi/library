@@ -1,14 +1,12 @@
 package library.command;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import library.dao.UserDAO;
 import library.model.User;
+import library.util.Encrypt;
 
 public class Login implements Command {
 	
@@ -20,10 +18,10 @@ public class Login implements Command {
 		
 		User user = new User();
 		user.setEmail(email);
-		user.setPassword(encrypt(email, password));
-		int role = UserDAO.checkUser(user);
-		if(role > 0) {
-			request.setAttribute("role", new Integer(role));
+		user.setPassword(Encrypt.generateHash(email, password));
+		Integer cpf = UserDAO.checkUser(user);
+		if(cpf != null) {
+			//request.setAttribute("role", new Integer(role));
 			
 			user = UserDAO.getUser(user.getEmail());
 			
@@ -31,7 +29,7 @@ public class Login implements Command {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user.getName());
 				session.setAttribute("cpf", user.getCpf());	
-				session.setAttribute("role", role);
+				session.setAttribute("role", user.getRole());
 			}
 			
 			return "allBooks.jsp";
@@ -41,20 +39,4 @@ public class Login implements Command {
 		return "allBooks.jsp";
 	}
 	
-	private String encrypt(String email, String password) {
-		String concat = email + password;
-		try {
-			StringBuffer encrypted = new StringBuffer();			
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(concat.getBytes(StandardCharsets.UTF_8));
-			for(int i=0; i<hash.length; i++) {
-				encrypted.append(hash[i]);
-			}
-			return encrypted.toString();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 }

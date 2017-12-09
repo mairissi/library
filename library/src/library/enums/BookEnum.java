@@ -8,7 +8,8 @@ public enum BookEnum {
     PUBLISHER("PUBLISHER"),
     DESCRIPTION("DESCRIPTION"),
     IMG_URL("IMG_URL"),
-    STATUS_ID("STATUS_ID");
+    STATUS_ID("STATUS_ID"),
+	CPF("CPF");
 	
 	private String header;
 	

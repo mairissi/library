@@ -65,7 +65,7 @@ language="java" contentType="text/html; charset=ISO-8859-1"
                 </label>
                 <div class="col-md-10">
                     <input id="IMR_URL" name="image_url" placeholder="" class="form-control input-md" required="" type="text" value="<%
-                    		if(book!=null){out.println(book.getImgUrl());}%>">
+                    		if(book!=null && book.getImgUrl() != null){out.println(book.getImgUrl());}%>">
                 </div>
             </div>
 

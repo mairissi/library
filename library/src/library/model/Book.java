@@ -11,7 +11,18 @@ public class Book {
 	private String description;
 	private String imgUrl;
 	private int status;
+	private String cpf;
 	
+	
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getTitle() {
 		return title;
 	}
