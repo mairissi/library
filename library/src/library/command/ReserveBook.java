@@ -36,11 +36,11 @@ public class ReserveBook extends BookControlCommand {
 				}
 			}
 			else {
-				message = "O usu·rio informado n„o pode realizar mais reservas.";
+				message = "O usuÔøΩrio informado n√£o pode realizar mais reservas.";
 			}
 		}
 		else {
-			message = "Este livro n„o est· disponÌvel para reserva.";
+			message = "Este livro n√£o est√° dispon√≠vel para reserva.";
 		}
 		
 		request.setAttribute("alert", alertType);

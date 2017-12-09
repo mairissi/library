@@ -29,24 +29,24 @@ public class BorrowBook extends BookControlCommand {
 					
 					// success
 					request.setAttribute("alert", "alert alert-success");
-					request.setAttribute("message", "EmprÈstimo realizado com sucesso!");
+					request.setAttribute("message", "Empr√©stimo realizado com sucesso!");
 					return "allBooks.jsp";
 				}
 				
 				// error
 				request.setAttribute("alert", "alert alert-danger");
-				request.setAttribute("message", "Erro ao efetuar emprÈstimo.");
+				request.setAttribute("message", "Erro ao efetuar empr√©stimo.");
 				
 				return "allBooks.jsp";
 			}
 			
 			// error
 			request.setAttribute("alert", "alert alert-danger");
-			request.setAttribute("message", "O usu·rio informado n„o pode efetuar mais emprÈstimos.");
+			request.setAttribute("message", "O usu√°rio informado nÔøΩo pode efetuar mais empr√©stimos.");
 		}
 		else {
 			request.setAttribute("alert", "alert alert-danger");
-			request.setAttribute("message", "Esse livro n„o est· disponÌvel para emprÈstimos.");
+			request.setAttribute("message", "Esse livro n√£o est√© dispon√≠vel para empr√©stimos.");
 		}
 		
 		return "allBooks.jsp";
