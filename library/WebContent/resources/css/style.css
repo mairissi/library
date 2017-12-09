@@ -283,6 +283,9 @@ th {
 }
 
 .imageButton{
-	margin: auto;
-	border: #F5F4F4;
+	border: none;
+	width: 220px; 
+	height: 250px; 
+	display: block; 
+	margin: 0 auto;
 }
