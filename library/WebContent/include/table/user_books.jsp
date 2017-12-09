@@ -7,7 +7,6 @@
 	import="library.enums.BookStatus"
 	import="library.dao.BookControlDAO" %>
 
-<form method=post action=control>
 	<table class="table">
 		<thead>
 			<th>Título</th>
@@ -41,7 +40,12 @@
 								<%
 									if (book.getStatus() == BookStatus.BORROWED.id()) {
 										%>
+										<form method=post action=control>
 										<td><button type="submit" name=command value=RenewBorrow class="btn btn-default <% if (control.getRenewalNumber() == 3) out.print("disabled"); %>">Renovar</button></td>
+										<input type=hidden name="isbn" value= <% out.print(isbn); %>>
+										<input type=hidden name="code" value= <% out.print(code); %> >
+										<input type=hidden name="cpf" value= <% out.print(request.getSession().getAttribute("cpf")); %> >
+										</form>
 										<td style="text-align:center"><% out.print(control.getRemainingRenewal()); %></td>
 										<%
 									} else if (book.getStatus() == BookStatus.RESERVED.id()) {
@@ -51,10 +55,6 @@
 										<%
 									}
 								%>
-								
-								<input type=hidden name="isbn" value= <% out.print(isbn); %>>
-								<input type=hidden name="code" value= <% out.print(code); %> >
-								<input type=hidden name="cpf" value= <% out.print(request.getSession().getAttribute("cpf")); %> >
 							<%
 							
 							break;

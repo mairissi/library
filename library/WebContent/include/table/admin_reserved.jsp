@@ -7,7 +7,6 @@
 	import="library.enums.BookStatus"
 	import="library.dao.BookControlDAO" %>
 
-<form method=post action=control>
 	<table class="table">
 		<thead>
 			<th>Título</th>
@@ -31,11 +30,13 @@
 							<td><% out.print(book.getTitle()); %></td>
 							<td><% out.print(book.getAuthor()); %></td>
 							<td><% out.print(control.getUserCpf()); %></td>
+							<form method=post action=control>
 							<td><button type="submit" name=command value=BorrowBook class="btn btn-default">Emprestar</button></td>
 							
 							<input type=hidden name="isbn" value= <% out.print(book.getIsbn()); %>>
 							<input type=hidden name="code" value= <% out.print(book.getCode()); %> >
 							<input type=hidden name=cpf value=<% out.print(control.getUserCpf()); %>>
+							</form>
 						</tr>
 						<%
 					}
@@ -45,4 +46,3 @@
 			%>
 		</tbody>
 	</table>
-</form>
