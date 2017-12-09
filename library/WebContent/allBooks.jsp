@@ -50,17 +50,20 @@
 			if(books != null){
 				for(Book book : books){
 					out.print("<div class=book>");//1
-					
-						out.print("<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">");
+						if (role == null){
+	                        out.print("<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">");
+						}
+						else{
+							out.print("<form method=post action=control><button title=Visualizar type=Submit class=imageButton>"
+									+ "<img src="+ book.getImgUrl() + " onerror=\"this.src='resources/images/notFound.gif'\">"
+									+ "</button>"
+									+ "<input type=hidden name=command value=getDetails>"
+									+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>");
+						}
 						out.print("<div class=option>");//2
 							out.print("<div class=title>" + book.getTitle() + "</div>");
 							out.print("<div class=author>" + book.getAuthor() + "</div>");
-							if(role != null){
-							out.print("<div class=option-view>" 
-									+ "<form method=post action=control><button title=Editar type=Submit class=\"btn btn-link option-view\">View</button>"
-									+ "<input type=hidden name=command value=getDetails>"
-									+ "<input type=hidden name=isbn value=" + book.getIsbn() + "></form>"
-								+ "</div>");
+						if(role != null){
 								if(role == 1){
 									out.print("<div>");//3
 										out.print("<div class=option-edit>" 
@@ -76,9 +79,8 @@
 												+ "</div>");
 									out.print("</div>");//3
 								}
-							}
+						}
 							out.print("</div>");//2
-							
 					out.print("</div>");//1
 				}
 			}else{

@@ -105,6 +105,23 @@ br {
     color: #BB0084;
 }
 
+.navbar-default .navbar-nav > li > form > a:hover, .navbar-default .navbar-nav > li > form > a:focus {
+    color: #BB0084;
+}
+
+.navbar-default .navbar-nav>li>form>a {
+    color: #777;
+    padding: 15px;
+    text-decoration: none;
+    line-height: 20px;
+}
+
+.nav>li>form>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
 .navbar-default .navbar-nav > .active{
     color: white;
     background: #BB0084;
@@ -169,7 +186,7 @@ br {
 
 .option-view {
     background: #990066;
-    width: 248px;
+    width: 82px;
     float: left;
     color: #CCC;
     border: none;
@@ -178,7 +195,7 @@ br {
 
 .option-view:hover {
     background: #BB0066;
-    width: 248px;
+    width: 82px;
     float: left;
     color: white;
     text-align: center;
@@ -230,7 +247,6 @@ th {
 
 .faq_question {
 	margin: 0px;
-	padding: 0px 0px 15px 0px;
 	display: inline-block;
 	cursor: pointer;
 	font-weight: bold;
@@ -257,4 +273,16 @@ th {
 	padding-left: 15px;
 	padding-top: 5px;
 	text-align: justify;
+}
+
+.faq {
+	background-color: #F5F4F4;
+	margin-bottom: 15px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.imageButton{
+	margin: auto;
+	border: #F5F4F4;
 }
